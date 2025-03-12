@@ -40,7 +40,7 @@
 #'   recommend exploring if this issue persists outside of geotargets. That is,
 #'   try saving the file out and reading it back in using regular R code. If you
 #'   find that this is an issue with geotargets, please file an issues at
-#'   \url{https://github.com/njtierney/geotargets/issues/} and we will try and
+#'   \url{https://github.com/ropensci/geotargets/issues/} and we will try and
 #'   get this working for you.
 #'
 #' @details

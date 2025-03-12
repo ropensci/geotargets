@@ -53,7 +53,7 @@ writing and unzipping them upon reading. This adds extra overhead and will
 slow pipelines. Also note metadata may be impacted by different versions
 of GDAL and different drivers. If you have an issue with retaining
 metadata for your setup, please file an issue at
-\url{https://github.com/njtierney/geotargets/issues/} and we will try and
+\url{https://github.com/ropensci/geotargets/issues/} and we will try and
 get this working for you. Also note that you can specify this option
 inside \code{\link[=geotargets_option_set]{geotargets_option_set()}} if you want to set this for the entire
 pipeline.}
