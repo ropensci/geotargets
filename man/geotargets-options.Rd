@@ -56,7 +56,7 @@ Specific options, such as "gdal.raster.driver". See "Details" for
 more information.
 }
 \description{
-Get or set behavior for geospatial data target stores using
+Get or set behaviour for geospatial data target stores using
 geotargets-specific global options.
 }
 \details{
@@ -64,7 +64,7 @@ These options can also be set using \code{options()}.  For example,
 \code{geotargets_options_set(gdal_raster_driver = "GTiff")} is equivalent to
 \code{options("geotargets.gdal.raster.driver" = "GTiff")}.
 }
-\section{Potential issues retaining metdatadata}{
+\section{Potential issues retaining metadata}{
 If you have an issue with retaining metadata (such as units, time, etc),
 this could be due to the versions of GDAL and terra on your machine. We
 recommend exploring if this issue persists outside of geotargets. That is,
