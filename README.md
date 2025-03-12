@@ -10,10 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-[![R-CMD-check](https://github.com/njtierney/geotargets/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/geotargets/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/njtierney/geotargets/branch/master/graph/badge.svg)](https://app.codecov.io/gh/njtierney/geotargets?branch=master)
-[![pkgcheck](https://github.com/njtierney/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/njtierney/geotargets/actions?query=workflow%3Apkgcheck)
+coverage](https://codecov.io/gh/ropensci/geotargets/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/geotargets?branch=master)
+[![pkgcheck](https://github.com/ropensci/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/675_status.svg)](https://github.com/ropensci/software-review/issues/675)
 <!-- badges: end -->
@@ -120,8 +120,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_rast_example
-#> ● completed target terra_rast_example [0.017 seconds, 7.992 kilobytes]
-#> ▶ ended pipeline [0.099 seconds]
+#> ● completed target terra_rast_example [0.012 seconds, 8.523 kilobytes]
+#> ▶ ended pipeline [0.08 seconds]
 #> class       : SpatRaster 
 #> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
@@ -162,8 +162,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_vect_example
-#> ● completed target terra_vect_example [0.021 seconds, 117.646 kilobytes]
-#> ▶ ended pipeline [0.065 seconds]
+#> ● completed target terra_vect_example [0.03 seconds, 117.646 kilobytes]
+#> ▶ ended pipeline [0.075 seconds]
 #>  class       : SpatVector 
 #>  geometry    : polygons 
 #>  dimensions  : 12, 6  (geometries, attributes)
@@ -209,8 +209,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target raster_elevs
-#> ● completed target raster_elevs [0.042 seconds, 36.423 kilobytes]
-#> ▶ ended pipeline [0.114 seconds]
+#> ● completed target raster_elevs [0.049 seconds, 37.904 kilobytes]
+#> ▶ ended pipeline [0.119 seconds]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
@@ -241,8 +241,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target test_stars
-#> ● completed target test_stars [0.016 seconds, 49.9 kilobytes]
-#> ▶ ended pipeline [0.065 seconds]
+#> ● completed target test_stars [0.019 seconds, 49.9 kilobytes]
+#> ▶ ended pipeline [0.066 seconds]
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
 #>             Min. 1st Qu. Median     Mean 3rd Qu. Max.
