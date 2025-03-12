@@ -41,7 +41,7 @@ bibliographic reference for your references:
 You can install the development version of geotargets like so:
 
 ``` r
-install.packages("geotargets", repos = c("https://njtierney.r-universe.dev", "https://cran.r-project.org"))
+install.packages("geotargets", repos = c("https://ropensci.r-universe.dev", "https://cran.r-project.org"))
 ```
 
 ## Why `geotargets`
@@ -120,8 +120,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_rast_example
-#> ● completed target terra_rast_example [0.012 seconds, 8.523 kilobytes]
-#> ▶ ended pipeline [0.083 seconds]
+#> ● completed target terra_rast_example [0.013 seconds, 8.523 kilobytes]
+#> ▶ ended pipeline [0.078 seconds]
 #> class       : SpatRaster 
 #> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
@@ -162,7 +162,7 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_vect_example
-#> ● completed target terra_vect_example [0.03 seconds, 117.646 kilobytes]
+#> ● completed target terra_vect_example [0.029 seconds, 117.646 kilobytes]
 #> ▶ ended pipeline [0.075 seconds]
 #>  class       : SpatVector 
 #>  geometry    : polygons 
@@ -209,8 +209,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target raster_elevs
-#> ● completed target raster_elevs [0.05 seconds, 37.904 kilobytes]
-#> ▶ ended pipeline [0.122 seconds]
+#> ● completed target raster_elevs [0.053 seconds, 37.904 kilobytes]
+#> ▶ ended pipeline [0.119 seconds]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
@@ -241,8 +241,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target test_stars
-#> ● completed target test_stars [0.019 seconds, 49.9 kilobytes]
-#> ▶ ended pipeline [0.066 seconds]
+#> ● completed target test_stars [0.02 seconds, 49.9 kilobytes]
+#> ▶ ended pipeline [0.092 seconds]
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
 #>             Min. 1st Qu. Median     Mean 3rd Qu. Max.

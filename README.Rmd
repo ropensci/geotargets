@@ -43,7 +43,7 @@ One example citation of geotargets could be as follows: "R packages used in this
 You can install the development version of geotargets like so:
 
 ``` r
-install.packages("geotargets", repos = c("https://njtierney.r-universe.dev", "https://cran.r-project.org"))
+install.packages("geotargets", repos = c("https://ropensci.r-universe.dev", "https://cran.r-project.org"))
 ```
 
 ## Why `geotargets`
