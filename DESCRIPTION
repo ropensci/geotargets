@@ -1,6 +1,6 @@
 Package: geotargets
 Title: 'Targets' Extensions for Geospatial Formats
-Version: 0.2.0.9000
+Version: 0.3.0
 Authors@R: c(
     person(
       given = "Nicholas", 
@@ -50,7 +50,7 @@ Suggests:
     fs,
     spelling
 Config/testthat/edition: 3
-URL: https://github.com/njtierney/geotargets, http://geotargets.njtierney.com
-BugReports: https://github.com/njtierney/geotargets/issues
+URL: https://github.com/ropensci/geotargets, https://docs.ropensci.org/geotargets
+BugReports: https://github.com/ropensci/geotargets/issues
 VignetteBuilder: knitr
 date:

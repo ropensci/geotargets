@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geotargets <a href="http://geotargets.njtierney.com/"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
+# geotargets <a href="https://docs.ropensci.org/geotargets"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -34,7 +34,7 @@ geotargets (Tierney, N., Scott, E., & Brown, A, 2024). Here is the full
 bibliographic reference for your references:
 
 > Tierney N, Scott E, Brown A (2024). “geotargets: ‘Targets’ Extensions
-> for Geospatial Formats.” <http://geotargets.njtierney.com>.
+> for Geospatial Formats.” <https://docs.ropensci.org/geotargets>.
 
 ## Installation
 
@@ -121,7 +121,7 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 })
 #> ▶ dispatched target terra_rast_example
 #> ● completed target terra_rast_example [0.012 seconds, 8.523 kilobytes]
-#> ▶ ended pipeline [0.08 seconds]
+#> ▶ ended pipeline [0.083 seconds]
 #> class       : SpatRaster 
 #> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
@@ -209,8 +209,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target raster_elevs
-#> ● completed target raster_elevs [0.049 seconds, 37.904 kilobytes]
-#> ▶ ended pipeline [0.119 seconds]
+#> ● completed target raster_elevs [0.05 seconds, 37.904 kilobytes]
+#> ▶ ended pipeline [0.122 seconds]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
