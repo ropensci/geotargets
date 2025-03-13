@@ -27,3 +27,4 @@
 
 # flint files
 ^flint$
+^cran-comments\.md$
