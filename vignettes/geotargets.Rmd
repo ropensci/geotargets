@@ -7,7 +7,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 # With the root.dir option below,
 # this vignette runs the R code in a temporary directory
 # so new files are written to temporary storage
@@ -15,16 +16,14 @@ vignette: >
 knitr::opts_knit$set(root.dir = fs::dir_create(tempfile()))
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = TRUE,
   comment = "#>"
 )
-if (identical(Sys.getenv("NOT_CRAN", unset = "false"), "false")) {
-  knitr::opts_chunk$set(eval = FALSE)
-}
-library(targets)
-library(geotargets)
 ```
 
-```{r setup}
+```{r}
+#| label: setup
+library(targets)
 library(geotargets)
 ```
 
@@ -45,16 +44,14 @@ In this vignette we will demonstrate the use of the `terra` R package, and we wi
 
 The example code in this vignette is designed for you to be able to just copy and paste into the R console. However, this is not a typical way to run a targets workflow. 
 
-The examples make use of [`targets::tar_script()`](https://docs.ropensci.org/targets/reference/tar_script.html), which creates or overwrites a `_targets.R` file (See for example, the [`_targets.R` file in the demo-geotargets repo](https://github.com/njtierney/demo-geotargets/blob/main/_targets.R)). In these examples, everything inside of `tar_script({})` is what would go inside a `_targets.R` file defining a workflow. When running the `tar_script` code, it will ask you each time if you want to overwrite the `_targets.R` file. This means if you are exploring these examples and copying the entire examples, it is worthwhile doing this in a separate repository to avoid overwriting your own `_targets.R` file.
+The examples make use of [`targets::tar_script()`](https://docs.ropensci.org/targets/reference/tar_script.html), which creates or overwrites a `_targets.R` file (See for example, the [`_targets.R` file in the demo-geotargets repo](https://github.com/njtierney/demo-geotargets/blob/main/_targets.R)). In these examples, everything inside of `tar_script({})` is what would go inside a `_targets.R` file defining a workflow. When running the `tar_script` code, it will ask you each time if you want to overwrite the `_targets.R` file. This means if you are exploring these examples and copying the entire examples, it is worthwhile doing this in a separate directory/project/repository to avoid overwriting your own `_targets.R` file.
 
-So, when building your own targets workflow it is **not recommended** to use `tar_script()`, but instead to edit `_targets.R` directly.
+So, when building your own targets workflow it is **not recommended** to use `tar_script()`, but instead to create `_targets.R` and edit `_targets.R` directly.
 
 ## `tar_terra_rast()`: targets with `terra` rasters
 
 ```{r}
 #| label: tar_script_rast
-#| eval: true
-
 targets::tar_script({
   library(targets)
   library(geotargets)
@@ -90,7 +87,6 @@ Running the pipeline:
 
 ```{r}
 #| label: make-rast
-#| eval: true
 #| echo: true
 
 tar_make()
@@ -112,7 +108,6 @@ As an alternative, you can encode information in the layer names by setting `nam
 
 ```{r}
 #| label: tar_script_rast_metadata
-#| eval: true
 targets::tar_script({
   # contents of _targets.R:
   library(targets)
@@ -140,7 +135,6 @@ targets::tar_script({
 
 ```{r}
 #| label: make_rast_metadata
-#| eval: true
 #| echo: true
 
 tar_make()
@@ -154,7 +148,6 @@ You can set vector specific options with `geotargets_option_set()` or with the `
 
 ```{r}
 #| label: tar_script_vect
-#| eval: true
 
 targets::tar_script({
   # contents of _targets.R:
@@ -181,7 +174,6 @@ targets::tar_script({
 
 ```{r}
 #| label: make_vect
-#| eval: true
 #| echo: true
 
 tar_make()
@@ -196,7 +188,6 @@ The various rasters in the collection are saved as subdatasets to adhere to `tar
 
 ```{r}
 #| label: tar_script_sprc
-#| eval: true
 
 targets::tar_script({
   # contents of _targets.R:
@@ -235,7 +226,6 @@ targets::tar_script({
 
 ```{r}
 #| label: make_sprc
-#| eval: true
 #| echo: true
 
 tar_make()
@@ -248,7 +238,6 @@ A `terra` `SpatRasterDataset` is very similar to a `SpatRasterCollection` except
 
 ```{r}
 #| label: tar_script_sds
-#| eval: true
 
 targets::tar_script({
   # contents of _targets.R:
@@ -276,7 +265,6 @@ targets::tar_script({
 ```{r}
 #| label: make_sds
 #| echo: true
-#| eval: true
 
 tar_make()
 tar_read(raster_dataset)
