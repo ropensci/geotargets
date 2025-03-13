@@ -70,7 +70,7 @@ for a symbol in R, and it must not start with a dot. See
 will be read as an object of class \code{stars_proxy}. Otherwise, the object is
 class \code{stars}.}
 
-\item{mdim}{logical. Use the \href{https://gdal.org/user/multidim_raster_data_model.html}{Multidimensional Raster Data Model} via
+\item{mdim}{logical. Use the \href{https://gdal.org/en/stable/user/multidim_raster_data_model.html}{Multidimensional Raster Data Model} via
 \code{\link[stars:mdim]{stars::write_mdim()}}? Default: \code{FALSE}. Only supported for some drivers,
 e.g. \code{"netCDF"} or \code{"Zarr"}.}
 

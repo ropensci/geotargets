@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geotargets <a href="https://docs.ropensci.org/geotargets"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
+# geotargets <a href="https://docs.ropensci.org/geotargets/"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -34,7 +34,7 @@ geotargets (Tierney, N., Scott, E., & Brown, A, 2024). Here is the full
 bibliographic reference for your references:
 
 > Tierney N, Scott E, Brown A (2024). “geotargets: ‘Targets’ Extensions
-> for Geospatial Formats.” <https://docs.ropensci.org/geotargets>.
+> for Geospatial Formats.” <https://docs.ropensci.org/geotargets/>.
 
 ## Installation
 
@@ -120,8 +120,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_rast_example
-#> ● completed target terra_rast_example [0.013 seconds, 8.523 kilobytes]
-#> ▶ ended pipeline [0.078 seconds]
+#> ● completed target terra_rast_example [0.045 seconds, 8.523 kilobytes]
+#> ▶ ended pipeline [0.165 seconds]
 #> class       : SpatRaster 
 #> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
@@ -162,8 +162,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_vect_example
-#> ● completed target terra_vect_example [0.029 seconds, 117.646 kilobytes]
-#> ▶ ended pipeline [0.075 seconds]
+#> ● completed target terra_vect_example [0.044 seconds, 117.646 kilobytes]
+#> ▶ ended pipeline [0.101 seconds]
 #>  class       : SpatVector 
 #>  geometry    : polygons 
 #>  dimensions  : 12, 6  (geometries, attributes)
@@ -209,8 +209,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target raster_elevs
-#> ● completed target raster_elevs [0.053 seconds, 37.904 kilobytes]
-#> ▶ ended pipeline [0.119 seconds]
+#> ● completed target raster_elevs [0.065 seconds, 37.904 kilobytes]
+#> ▶ ended pipeline [0.148 seconds]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
@@ -242,7 +242,7 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 })
 #> ▶ dispatched target test_stars
 #> ● completed target test_stars [0.02 seconds, 49.9 kilobytes]
-#> ▶ ended pipeline [0.092 seconds]
+#> ▶ ended pipeline [0.069 seconds]
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
 #>             Min. 1st Qu. Median     Mean 3rd Qu. Max.

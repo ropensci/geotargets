@@ -18,14 +18,14 @@ geotargets_option_get(name)
 \arguments{
 \item{gdal_raster_driver}{character, length 1; set the driver used for raster
 data in target store (default: \code{"GTiff"}). Options for driver names can be
-found here: \url{https://gdal.org/drivers/raster/index.html}.}
+found here: \url{https://gdal.org/en/stable/drivers/raster/index.html}.}
 
 \item{gdal_raster_creation_options}{character; set the GDAL creation options
 used when writing raster files to target store (default: \code{""}). You may
 specify multiple values e.g. \code{c("COMPRESS=DEFLATE", "TFW=YES")}. Each GDAL
 driver supports a unique set of creation options. For example, with the
 default \code{"GTiff"} driver:
-\url{https://gdal.org/drivers/raster/gtiff.html#creation-options}.}
+\url{https://gdal.org/en/stable/drivers/raster/gtiff.html}.}
 
 \item{gdal_vector_driver}{character, length 1; set the file type used for
 vector data in target store (default: \code{"GeoJSON"}).}
@@ -36,7 +36,7 @@ options used when writing vector files to target store (default:
 \code{c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")}. Each GDAL driver supports
 a unique set of creation options. For example, with the default \code{"GeoJSON"}
 driver:
-\url{https://gdal.org/drivers/vector/geojson.html#layer-creation-options}}
+\url{https://gdal.org/en/stable/drivers/vector/geojson.html}}
 
 \item{terra_preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
