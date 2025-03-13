@@ -28,3 +28,4 @@
 # flint files
 ^flint$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
