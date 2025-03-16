@@ -145,7 +145,7 @@ tar_terra_rast <- function(
       substitute = list(
         filetype = filetype,
         gdal = gdal,
-        preserve_metadata = preserve_metadata
+        preserve_metadata = preserve_metadata,
         args = list(...)
       )
     ),
