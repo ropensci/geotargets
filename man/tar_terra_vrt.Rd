@@ -241,26 +241,52 @@ lists all the targets whose descriptions start with the character
 string \code{"survival model"}.}
 }
 \description{
-Provides a target format for \link[terra:SpatRaster-class]{terra::SpatRaster}, \link[terra:SpatRaster-class]{terra::SpatRasterDataset}, and \link[terra:SpatRaster-class]{terra::SpatRasterCollection} objects representing a
-\href{https://gdal.org/en/stable/drivers/raster/vrt.html}{GDAL Virtual Dataset (VRT)}.
+Provides a target format for \link[terra:SpatRaster-class]{terra::SpatRaster},
+\link[terra:SpatRaster-class]{terra::SpatRasterDataset}, and \link[terra:SpatRaster-class]{terra::SpatRasterCollection}
+objects representing a \href{https://gdal.org/en/stable/drivers/raster/vrt.html}{GDAL Virtual Dataset (VRT)}.
+}
+\details{
+\code{tar_terra_vrt()} accepts SpatRaster, SpatRasterDataset, or
+SpatRasterCollection objects as input, and returns a SpatRaster referencing
+a GDAL Virtual Dataset file (.vrt). The .vrt file format uses XML and
+describes the layers and tiles that comprise a virtual raster data source.
+To use a list of SpatRaster of varying extent, such as output from
+\code{tar_terra_tiles()}, or a character vector of paths, wrap the tile result
+in a call to \code{terra::sprc()} to create a SpatRasterCollection.
 }
 \examples{
 if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
  targets::tar_dir({ # tar_dir() runs code from a temporary directory.
-   library(geotargets)
    targets::tar_script({
      list(
        geotargets::tar_terra_vrt(
          terra_rast_example,
-         terra::vrt(system.file("ex/elev.tif", package = "terra"))
+         terra::rast(system.file("ex/elev.tif", package = "terra"))
        )
      )
    })
    targets::tar_make()
    x <- targets::tar_read(terra_rast_example)
  })
+
+targets::tar_dir({
+    targets::tar_script({
+        library(targets)
+        library(geotargets)
+        list(
+            tar_terra_rast(r, terra::rast(
+                system.file("ex", "elev.tif", package = "terra")
+            )),
+            tar_terra_rast(r2, r * 2),
+            tar_terra_tiles(rt, c(r, r2), function(x)
+                tile_grid(x, ncol = 2, nrow = 2)),
+            tar_terra_vrt(r3, terra::sprc(rt))
+        )
+    })
+})
+
 }
 }
 \seealso{
-\code{\link[targets:tar_target]{targets::tar_target_raw()}}
+\code{\link[=tar_terra_tiles]{tar_terra_tiles()}}
 }

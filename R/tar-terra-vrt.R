@@ -1,29 +1,55 @@
 #' Create a GDAL Virtual Dataset (VRT) with terra
 #'
-#' Provides a target format for [terra::SpatRaster-class], [terra::SpatRasterDataset-class], and [terra::SpatRasterCollection-class] objects representing a
-#' [GDAL Virtual Dataset (VRT)](https://gdal.org/en/stable/drivers/raster/vrt.html).
+#' Provides a target format for [terra::SpatRaster-class],
+#' [terra::SpatRasterDataset-class], and [terra::SpatRasterCollection-class]
+#' objects representing a [GDAL Virtual Dataset
+#' (VRT)](https://gdal.org/en/stable/drivers/raster/vrt.html).
 #'
 #' @param ... Additional arguments passed to [terra::vrt()]
 #'
+#' @details `tar_terra_vrt()` accepts SpatRaster, SpatRasterDataset, or
+#'   SpatRasterCollection objects as input, and returns a SpatRaster referencing
+#'   a GDAL Virtual Dataset file (.vrt). The .vrt file format uses XML and
+#'   describes the layers and tiles that comprise a virtual raster data source.
+#'   To use a list of SpatRaster of varying extent, such as output from
+#'   `tar_terra_tiles()`, or a character vector of paths, wrap the tile result
+#'   in a call to `terra::sprc()` to create a SpatRasterCollection.
+#'
 #' @inheritParams targets::tar_target
 #' @importFrom rlang %||% arg_match0
-#' @seealso [targets::tar_target_raw()]
+#' @seealso [geotargets::tar_terra_tiles()]
 #' @export
 #' @examples
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 #'  targets::tar_dir({ # tar_dir() runs code from a temporary directory.
-#'    library(geotargets)
 #'    targets::tar_script({
 #'      list(
 #'        geotargets::tar_terra_vrt(
 #'          terra_rast_example,
-#'          terra::vrt(system.file("ex/elev.tif", package = "terra"))
+#'          terra::rast(system.file("ex/elev.tif", package = "terra"))
 #'        )
 #'      )
 #'    })
 #'    targets::tar_make()
 #'    x <- targets::tar_read(terra_rast_example)
 #'  })
+#'
+#' targets::tar_dir({
+#'     targets::tar_script({
+#'         library(targets)
+#'         library(geotargets)
+#'         list(
+#'             tar_terra_rast(r, terra::rast(
+#'                 system.file("ex", "elev.tif", package = "terra")
+#'             )),
+#'             tar_terra_rast(r2, r * 2),
+#'             tar_terra_tiles(rt, c(r, r2), function(x)
+#'                 tile_grid(x, ncol = 2, nrow = 2)),
+#'             tar_terra_vrt(r3, terra::sprc(rt))
+#'         )
+#'     })
+#' })
+#'
 #'}
 tar_terra_vrt <- function(name,
                           command,
