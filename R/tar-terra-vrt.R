@@ -1,7 +1,7 @@
-#' Create a Virtual terra _SpatRaster_ target
+#' Create a GDAL Virtual Dataset (VRT) with terra
 #'
-#' Provides a target format for [terra::SpatRaster-class] objects representing a
-#' GDAL Virtual Dataset (VRT)
+#' Provides a target format for [terra::SpatRaster-class], [terra::SpatRasterDataset-class], and [terra::SpatRasterCollection-class] objects representing a
+#' [GDAL Virtual Dataset (VRT)](https://gdal.org/en/stable/drivers/raster/vrt.html).
 #'
 #' @param ... Additional arguments passed to [terra::vrt()]
 #'
