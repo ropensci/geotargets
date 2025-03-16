@@ -67,14 +67,11 @@ tar_terra_vrt <- function(name,
     }
 
     .format_terra_vrt_write <- function(object, path) {
-        # list of SpatRaster or SpatRasterCollection => SpatRasterCollection
-        if (is.list(object)) {
-            object <- terra::sprc(object)
-        }
-
         # SpatRaster or SpatRasterCollection => character vector of source file path
-        if (inherits(object, c("SpatRaster", "SpatRasterCollection"))) {
+        if (inherits(object, c("SpatRaster", "SpatRasterDataset", "SpatRasterCollection"))) {
             object <- terra::sources(object)
+        } else {
+            stop("Input object should be an object of class SpatRaster, SpatRasterDataset, or SpatRasterCollection")
         }
 
         # default: the VRT contains project-specific paths to target store
