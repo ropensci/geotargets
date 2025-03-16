@@ -78,9 +78,13 @@ list(
     tar_terra_tiles(
         name = rast_split_2blocks,
         raster = my_map,
-        tile_fun = \(x) tile_blocksize(x, n_blocks_row = 2, n_blocks_col = 1),
+        tile_fun = \(x) tile_blocksize(
+          x,
+          n_blocks_row = 2,
+          n_blocks_col = 1
+          ),
         description = "Each tile is 2 blocks tall, 1 block wide"
-    )
+    ),
     tar_terra_tiles(
         name = rast_split_grid,
         raster = my_map,

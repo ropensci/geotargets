@@ -13,9 +13,9 @@ Provides extensions for various geospatial file formats, such as shapefiles and 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/njtierney/geotargets}
-  \item \url{http://geotargets.njtierney.com}
-  \item Report bugs at \url{https://github.com/njtierney/geotargets/issues}
+  \item \url{https://github.com/ropensci/geotargets}
+  \item \url{https://docs.ropensci.org/geotargets/}
+  \item Report bugs at \url{https://github.com/ropensci/geotargets/issues}
 }
 
 }

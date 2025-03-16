@@ -18,14 +18,14 @@ geotargets_option_get(name)
 \arguments{
 \item{gdal_raster_driver}{character, length 1; set the driver used for raster
 data in target store (default: \code{"GTiff"}). Options for driver names can be
-found here: \url{https://gdal.org/drivers/raster/index.html}.}
+found here: \url{https://gdal.org/en/stable/drivers/raster/index.html}.}
 
 \item{gdal_raster_creation_options}{character; set the GDAL creation options
 used when writing raster files to target store (default: \code{""}). You may
 specify multiple values e.g. \code{c("COMPRESS=DEFLATE", "TFW=YES")}. Each GDAL
 driver supports a unique set of creation options. For example, with the
 default \code{"GTiff"} driver:
-\url{https://gdal.org/drivers/raster/gtiff.html#creation-options}.}
+\url{https://gdal.org/en/stable/drivers/raster/gtiff.html}.}
 
 \item{gdal_vector_driver}{character, length 1; set the file type used for
 vector data in target store (default: \code{"GeoJSON"}).}
@@ -36,7 +36,7 @@ options used when writing vector files to target store (default:
 \code{c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")}. Each GDAL driver supports
 a unique set of creation options. For example, with the default \code{"GeoJSON"}
 driver:
-\url{https://gdal.org/drivers/vector/geojson.html#layer-creation-options}}
+\url{https://gdal.org/en/stable/drivers/vector/geojson.html}}
 
 \item{terra_preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
@@ -44,7 +44,10 @@ raster metadata such as units and datetimes are lost (note that this does
 not include layer names set with \verb{names() <-}).  When \code{"zip"}, these
 metadata are retained by archiving all written files as a zip file upon
 writing and unzipping them upon reading. This adds extra overhead and will
-slow pipelines.}
+slow pipelines. Also note metadata may be impacted by different versions
+of GDAL and different drivers. Note that you can specify this option for
+individual targets, e.g., inside \code{\link[=tar_terra_rast]{tar_terra_rast()}} there is the option,
+\code{preserve_metadata}.}
 
 \item{name}{character; option name to get.}
 }
@@ -53,7 +56,7 @@ Specific options, such as "gdal.raster.driver". See "Details" for
 more information.
 }
 \description{
-Get or set behavior for geospatial data target stores using
+Get or set behaviour for geospatial data target stores using
 geotargets-specific global options.
 }
 \details{
@@ -61,23 +64,46 @@ These options can also be set using \code{options()}.  For example,
 \code{geotargets_options_set(gdal_raster_driver = "GTiff")} is equivalent to
 \code{options("geotargets.gdal.raster.driver" = "GTiff")}.
 }
+\section{Potential issues retaining metadata}{
+If you have an issue with retaining metadata (such as units, time, etc),
+this could be due to the versions of GDAL and terra on your machine. We
+recommend exploring if this issue persists outside of geotargets. That is,
+try saving the file out and reading it back in using regular R code. If you
+find that this is an issue with geotargets, please file an issues at
+\url{https://github.com/ropensci/geotargets/issues/} and we will try and
+get this working for you.
+}
+
 \examples{
+# For CRAN. Ensures these examples run under certain conditions.
+# To run this locally, run the code inside this if statement
 if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
-  targets::tar_dir({ # tar_dir() runs code from a temporary directory.
+# tar_dir() runs code from a temporary directory.
+  targets::tar_dir({
     library(geotargets)
     op <- getOption("geotargets.gdal.raster.driver")
     withr::defer(options("geotargets.gdal.raster.driver" = op))
-    geotargets_option_set(gdal_raster_driver = "COG")
+    geotargets_option_set(
+      gdal_raster_driver = "COG",
+      terra_preserve_metadata = "zip"
+    )
     targets::tar_script({
       list(
         geotargets::tar_terra_rast(
           terra_rast_example,
-          system.file("ex/elev.tif", package = "terra") |> terra::rast()
+          {
+            new_rast <- system.file("ex/elev.tif", package = "terra") |>
+              terra::rast()
+            terra::units(new_rast) <- "m"
+            new_rast
+          }
         )
       )
     })
     targets::tar_make()
     x <- targets::tar_read(terra_rast_example)
+    x
+    terra::units(x)
   })
 }
 

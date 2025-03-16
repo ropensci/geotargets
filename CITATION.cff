@@ -1,16 +1,17 @@
-# -----------------------------------------------------------
-# CITATION file created with {cffr} R package, v0.5.0
+# --------------------------------------------
+# CITATION file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
-# -----------------------------------------------------------
+# --------------------------------------------
  
 cff-version: 1.2.0
 message: 'To cite package "geotargets" in publications use:'
 type: software
 license: MIT
-title: 'geotargets: Targets extensions for geospatial formats'
-version: 0.0.0.9000
-abstract: Provides extensions for various geospatial file formats, such as shapefiles
-  and rasters. See the vignettes for worked examples and demonstrations and explanations
+title: 'geotargets: ''Targets'' Extensions for Geographic Spatial Formats'
+version: 0.3.0
+abstract: Provides extensions for various geographic spatial file formats, such as
+  shape files and rasters. Currently provides support for the 'terra' geographic spatial
+  formats. See the vignettes for worked examples, demonstrations, and explanations
   of how to use the various package extensions.
 authors:
 - family-names: Tierney
@@ -23,8 +24,42 @@ authors:
 - family-names: Brown
   given-names: Andrew
   orcid: https://orcid.org/0000-0002-4565-533X
-repository-code: https://github.com/njtierney/geotargets
-url: https://njtierney.github.io/geotargets/
+preferred-citation:
+  type: generic
+  title: 'geotargets: ''Targets'' Extensions for Geospatial Formats'
+  authors:
+  - family-names: Tierney
+    given-names: Nicholas
+    email: nicholas.tierney@gmail.com
+    orcid: https://orcid.org/0000-0003-1460-8722
+  - family-names: Scott
+    given-names: Eric
+    orcid: https://orcid.org/0000-0002-7430-7879
+  - family-names: Brown
+    given-names: Andrew
+    orcid: https://orcid.org/0000-0002-4565-533X
+  year: '2024'
+  url: https://docs.ropensci.org/geotargets/
+  abstract: Provides extensions for various geospatial file formats, such as shapefiles
+    and rasters. Currently provides support for the 'terra' geospatial formats. See
+    the vignettes for worked examples, demonstrations, and explanations of how to
+    use the various package extensions.
+  keywords:
+  - geospatial
+  - pipeline
+  - r
+  - r-package
+  - r-targetopia
+  - raster
+  - reproducibility
+  - reproducible-research
+  - rstats
+  - targets
+  - vector
+  - workflow
+  version: 0.3.0
+repository-code: https://github.com/ropensci/geotargets
+url: https://docs.ropensci.org/geotargets/
 contact:
 - family-names: Tierney
   given-names: Nicholas
@@ -43,3 +78,4 @@ keywords:
 - targets
 - vector
 - workflow
+

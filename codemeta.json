@@ -4,11 +4,11 @@
   "identifier": "geotargets",
   "description": "Provides extensions for various geospatial file formats, such as shapefiles and rasters. Currently provides support for the 'terra' geospatial formats. See the vignettes for worked examples, demonstrations, and explanations of how to use the various package extensions.",
   "name": "geotargets: 'Targets' Extensions for Geospatial Formats",
-  "relatedLink": "https://njtierney.github.io/geotargets/",
-  "codeRepository": "https://github.com/njtierney/geotargets",
-  "issueTracker": "https://github.com/njtierney/geotargets/issues",
+  "relatedLink": "https://docs.ropensci.org/geotargets",
+  "codeRepository": "https://github.com/ropensci/geotargets",
+  "issueTracker": "https://github.com/ropensci/geotargets/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.2.0.9000",
+  "version": "0.3.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -143,6 +143,18 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=fs"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "spelling",
+      "name": "spelling",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=spelling"
     }
   ],
   "softwareRequirements": {
@@ -189,7 +201,7 @@
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
-      "version": ">= 1.7.71",
+      "version": ">= 1.8-10",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -237,10 +249,44 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "283.856KB",
-  "releaseNotes": "https://github.com/njtierney/geotargets/blob/master/NEWS.md",
-  "readme": "https://github.com/njtierney/geotargets/blob/master/README.md",
-  "contIntegration": ["https://github.com/njtierney/geotargets/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/njtierney/geotargets?branch=master"],
-  "developmentStatus": "https://www.repostatus.org/#wip",
+  "fileSize": "296.887KB",
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "datePublished": "2024",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Nicholas",
+          "familyName": "Tierney",
+          "email": "nicholas.tierney@gmail.com",
+          "@id": "https://orcid.org/0000-0003-1460-8722"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Eric",
+          "familyName": "Scott",
+          "@id": "https://orcid.org/0000-0002-7430-7879"
+        },
+        {
+          "@type": "Person",
+          "givenName": "Andrew",
+          "familyName": "Brown",
+          "@id": "https://orcid.org/0000-0002-4565-533X"
+        }
+      ],
+      "name": "geotargets: 'Targets' Extensions for Geospatial Formats",
+      "url": "http://geotargets.njtierney.com"
+    }
+  ],
+  "releaseNotes": "https://github.com/ropensci/geotargets/blob/master/NEWS.md",
+  "readme": "https://github.com/ropensci/geotargets/blob/master/README.md",
+  "contIntegration": ["https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/geotargets?branch=master", "https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck"],
+  "developmentStatus": "https://www.repostatus.org/#active",
+  "review": {
+    "@type": "Review",
+    "url": "https://github.com/ropensci/software-review/issues/675",
+    "provider": "https://ropensci.org"
+  },
   "keywords": ["geospatial", "pipeline", "r", "r-package", "r-targetopia", "raster", "reproducibility", "reproducible-research", "rstats", "targets", "vector", "workflow"]
 }
