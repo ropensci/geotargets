@@ -3,9 +3,11 @@
 #' Provides a target format for [terra::SpatRasterCollection] objects,
 #'   which have no restriction in the extent or other geometric parameters.
 #'
-#' @param name Symbol, name of the target. A target
-#'   name must be a valid name for a symbol in R, and it
-#'   must not start with a dot. See [targets::tar_target()] for more information.
+#' @inherit tar_terra_rast details
+#'
+#' @param name Symbol, name of the target. A target name must be a valid name
+#'   for a symbol in R, and it must not start with a dot. See
+#'   [targets::tar_target()] for more information.
 #' @param command R code to run the target.
 #' @param pattern Code to define a dynamic branching pattern for a target. See
 #'   [targets::tar_target()] for more information.
@@ -26,10 +28,12 @@
 #' @author Nicholas Tierney
 #' @export
 #' @examples
+#' # For CRAN. Ensures these examples run under certain conditions.
+#' # To run this locally, run the code inside this if statement
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 #'   targets::tar_dir({ # tar_dir() runs code from a temporary directory.
-#'     library(geotargets)
 #'     targets::tar_script({
+#'       library(geotargets)
 #'       elev_scale <- function(z = 1, projection = "EPSG:4326") {
 #'         terra::project(
 #'           terra::rast(system.file("ex", "elev.tif", package = "terra")) * z,
@@ -49,29 +53,31 @@
 #'       )
 #'     })
 #'     targets::tar_make()
-#'     x <- targets::tar_read(raster_elevs)
+#'     targets::tar_read(raster_elevs)
 #'   })
 #' }
-tar_terra_sprc <- function(name,
-                           command,
-                           pattern = NULL,
-                           filetype = geotargets_option_get("gdal.raster.driver"),
-                           gdal = geotargets_option_get("gdal.raster.creation.options"),
-                           ...,
-                           tidy_eval = targets::tar_option_get("tidy_eval"),
-                           packages = targets::tar_option_get("packages"),
-                           library = targets::tar_option_get("library"),
-                           repository = targets::tar_option_get("repository"),
-                           error = targets::tar_option_get("error"),
-                           memory = targets::tar_option_get("memory"),
-                           garbage_collection = targets::tar_option_get("garbage_collection"),
-                           deployment = targets::tar_option_get("deployment"),
-                           priority = targets::tar_option_get("priority"),
-                           resources = targets::tar_option_get("resources"),
-                           storage = targets::tar_option_get("storage"),
-                           retrieval = targets::tar_option_get("retrieval"),
-                           cue = targets::tar_option_get("cue"),
-                           description = targets::tar_option_get("description")) {
+tar_terra_sprc <- function(
+        name,
+        command,
+        pattern = NULL,
+        filetype = geotargets_option_get("gdal.raster.driver"),
+        gdal = geotargets_option_get("gdal.raster.creation.options"),
+        ...,
+        tidy_eval = targets::tar_option_get("tidy_eval"),
+        packages = targets::tar_option_get("packages"),
+        library = targets::tar_option_get("library"),
+        repository = targets::tar_option_get("repository"),
+        error = targets::tar_option_get("error"),
+        memory = targets::tar_option_get("memory"),
+        garbage_collection = targets::tar_option_get("garbage_collection"),
+        deployment = targets::tar_option_get("deployment"),
+        priority = targets::tar_option_get("priority"),
+        resources = targets::tar_option_get("resources"),
+        storage = targets::tar_option_get("storage"),
+        retrieval = targets::tar_option_get("retrieval"),
+        cue = targets::tar_option_get("cue"),
+        description = targets::tar_option_get("description")
+) {
   # ensure that user-passed `resources` doesn't include `custom_format`
     check_user_resources(resources)
 
@@ -127,9 +133,11 @@ tar_terra_sprc <- function(name,
 #' Provides a target format for [terra::SpatRasterDataset] objects,
 #'   which hold sub-datasets, each a `SpatRaster` that can have multiple layers.
 #'
-#' @param name Symbol, name of the target. A target
-#'   name must be a valid name for a symbol in R, and it
-#'   must not start with a dot. See [targets::tar_target()] for more information.
+#' @inherit tar_terra_rast details
+#'
+#' @param name Symbol, name of the target. A target name must be a valid name
+#'   for a symbol in R, and it must not start with a dot. See
+#'   [targets::tar_target()] for more information.
 #' @param command R code to run the target.
 #' @param pattern Code to define a dynamic branching pattern for a target. See
 #'   [targets::tar_target()] for more information.
@@ -151,10 +159,12 @@ tar_terra_sprc <- function(name,
 #' @author Eric R. Scott
 #' @export
 #' @examples
+#' # For CRAN. Ensures these examples run under certain conditions.
+#' # To run this locally, run the code inside this if statement
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 #'   targets::tar_dir({ # tar_dir() runs code from a temporary directory.
-#'     library(geotargets)
 #'     targets::tar_script({
+#'       library(geotargets)
 #'       elev_scale <- function(z = 1) {
 #'         terra::rast(system.file("ex", "elev.tif", package = "terra")) * z
 #'       }
@@ -173,26 +183,28 @@ tar_terra_sprc <- function(name,
 #'     targets::tar_read(raster_elevs)
 #'   })
 #' }
-tar_terra_sds <- function(name,
-                          command,
-                          pattern = NULL,
-                          filetype = geotargets_option_get("gdal.raster.driver"),
-                          gdal = geotargets_option_get("gdal.raster.creation.options"),
-                          ...,
-                          tidy_eval = targets::tar_option_get("tidy_eval"),
-                          packages = targets::tar_option_get("packages"),
-                          library = targets::tar_option_get("library"),
-                          repository = targets::tar_option_get("repository"),
-                          error = targets::tar_option_get("error"),
-                          memory = targets::tar_option_get("memory"),
-                          garbage_collection = targets::tar_option_get("garbage_collection"),
-                          deployment = targets::tar_option_get("deployment"),
-                          priority = targets::tar_option_get("priority"),
-                          resources = targets::tar_option_get("resources"),
-                          storage = targets::tar_option_get("storage"),
-                          retrieval = targets::tar_option_get("retrieval"),
-                          cue = targets::tar_option_get("cue"),
-                          description = targets::tar_option_get("description")) {
+tar_terra_sds <- function(
+        name,
+        command,
+        pattern = NULL,
+        filetype = geotargets_option_get("gdal.raster.driver"),
+        gdal = geotargets_option_get("gdal.raster.creation.options"),
+        ...,
+        tidy_eval = targets::tar_option_get("tidy_eval"),
+        packages = targets::tar_option_get("packages"),
+        library = targets::tar_option_get("library"),
+        repository = targets::tar_option_get("repository"),
+        error = targets::tar_option_get("error"),
+        memory = targets::tar_option_get("memory"),
+        garbage_collection = targets::tar_option_get("garbage_collection"),
+        deployment = targets::tar_option_get("deployment"),
+        priority = targets::tar_option_get("priority"),
+        resources = targets::tar_option_get("resources"),
+        storage = targets::tar_option_get("storage"),
+        retrieval = targets::tar_option_get("retrieval"),
+        cue = targets::tar_option_get("cue"),
+        description = targets::tar_option_get("description")
+) {
   # ensure that user-passed `resources` doesn't include `custom_format`
     check_user_resources(resources)
 
@@ -246,26 +258,28 @@ tar_terra_sds <- function(name,
 
 
 #' @noRd
-tar_terra_collection_raw <- function(name,
-                                     command,
-                                     type = type,
-                                     filetype = geotargets_option_get("gdal.raster.driver"),
-                                     gdal = geotargets_option_get("gdal.raster.creation.options"),
-                                     pattern = NULL,
-                                     packages = targets::tar_option_get("packages"),
-                                     library = targets::tar_option_get("library"),
-                                     repository = targets::tar_option_get("repository"),
-                                     error = targets::tar_option_get("error"),
-                                     memory = targets::tar_option_get("memory"),
-                                     garbage_collection = targets::tar_option_get("garbage_collection"),
-                                     deployment = targets::tar_option_get("deployment"),
-                                     priority = targets::tar_option_get("priority"),
-                                     resources = targets::tar_option_get("resources"),
-                                     storage = targets::tar_option_get("storage"),
-                                     retrieval = targets::tar_option_get("retrieval"),
-                                     cue = targets::tar_option_get("cue"),
-                                     description = targets::tar_option_get("description")) {
-  targets::tar_target_raw(
+tar_terra_collection_raw <- function(
+        name,
+        command,
+        type = type,
+        filetype = geotargets_option_get("gdal.raster.driver"),
+        gdal = geotargets_option_get("gdal.raster.creation.options"),
+        pattern = NULL,
+        packages = targets::tar_option_get("packages"),
+        library = targets::tar_option_get("library"),
+        repository = targets::tar_option_get("repository"),
+        error = targets::tar_option_get("error"),
+        memory = targets::tar_option_get("memory"),
+        garbage_collection = targets::tar_option_get("garbage_collection"),
+        deployment = targets::tar_option_get("deployment"),
+        priority = targets::tar_option_get("priority"),
+        resources = targets::tar_option_get("resources"),
+        storage = targets::tar_option_get("storage"),
+        retrieval = targets::tar_option_get("retrieval"),
+        cue = targets::tar_option_get("cue"),
+        description = targets::tar_option_get("description")
+        ) {
+    targets::tar_target_raw(
     name = name,
     command = command,
     pattern = pattern,
@@ -288,8 +302,7 @@ tar_terra_collection_raw <- function(name,
               # The warning message "[rast] skipped sub-datasets..."
               # is printed because the return value of writeRaster()
               # is rast(<output>).  In this context it is not
-              # informative since the read function is sprc(), not
-              # rast()
+              # informative since the read function is sprc(), not rast()
               if (grepl("\\[rast\\] skipped sub-datasets", cnd$message)) {
                 rlang::cnd_muffle(cnd)
               }

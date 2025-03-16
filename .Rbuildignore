@@ -22,3 +22,10 @@
 ^Meta$
 ^codemeta\.json$
 ^\.covrignore$
+^\.lintr$
+
+
+# flint files
+^flint$
+^cran-comments\.md$
+^CRAN-SUBMISSION$

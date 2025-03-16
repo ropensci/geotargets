@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# geotargets <a href="http://geotargets.njtierney.com/"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
+# geotargets <a href="https://docs.ropensci.org/geotargets/"><img src="man/figures/logo.png" alt="geotargets website" align="right" height="139"/></a>
 
 <!-- badges: start -->
 
@@ -10,10 +10,10 @@ state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![R
 Targetopia](https://img.shields.io/badge/R_Targetopia-member-blue?style=flat&labelColor=gray)](https://wlandau.github.io/targetopia/)
-[![R-CMD-check](https://github.com/njtierney/geotargets/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtierney/geotargets/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/njtierney/geotargets/branch/master/graph/badge.svg)](https://app.codecov.io/gh/njtierney/geotargets?branch=master)
-[![pkgcheck](https://github.com/njtierney/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/njtierney/geotargets/actions?query=workflow%3Apkgcheck)
+coverage](https://codecov.io/gh/ropensci/geotargets/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/geotargets?branch=master)
+[![pkgcheck](https://github.com/ropensci/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/675_status.svg)](https://github.com/ropensci/software-review/issues/675)
 <!-- badges: end -->
@@ -21,14 +21,27 @@ Review](https://badges.ropensci.org/675_status.svg)](https://github.com/ropensci
 `geotargets` extends [`targets`](https://github.com/ropensci/targets) to
 work with geospatial data formats, such as rasters and vectors (e.g.,
 shapefiles). Currently we support raster and vector formats for the
-[`terra`](https://github.com/rspatial/terra) package
+[`terra`](https://github.com/rspatial/terra) package.
+
+If you are unfamiliar with targets, we recommend watching [“targets in 4
+minutes”](https://docs.ropensci.org/targets/#get-started-in-4-minutes).
+
+## How to cite geotargets
+
+One example citation of geotargets could be as follows: “R packages used
+in this analysis included (list R packages used), targets, and
+geotargets (Tierney, N., Scott, E., & Brown, A, 2024). Here is the full
+bibliographic reference for your references:
+
+> Tierney N, Scott E, Brown A (2024). “geotargets: ‘Targets’ Extensions
+> for Geospatial Formats.” <https://docs.ropensci.org/geotargets/>.
 
 ## Installation
 
 You can install the development version of geotargets like so:
 
 ``` r
-install.packages("geotargets", repos = c("https://njtierney.r-universe.dev", "https://cran.r-project.org"))
+install.packages("geotargets", repos = c("https://ropensci.r-universe.dev", "https://cran.r-project.org"))
 ```
 
 ## Why `geotargets`
@@ -107,8 +120,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_rast_example
-#> ● completed target terra_rast_example [0.074 seconds, 7.992 kilobytes]
-#> ▶ ended pipeline [0.316 seconds]
+#> ● completed target terra_rast_example [0.045 seconds, 8.523 kilobytes]
+#> ▶ ended pipeline [0.165 seconds]
 #> class       : SpatRaster 
 #> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
@@ -149,8 +162,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target terra_vect_example
-#> ● completed target terra_vect_example [0.078 seconds, 117.646 kilobytes]
-#> ▶ ended pipeline [0.259 seconds]
+#> ● completed target terra_vect_example [0.044 seconds, 117.646 kilobytes]
+#> ▶ ended pipeline [0.101 seconds]
 #>  class       : SpatVector 
 #>  geometry    : polygons 
 #>  dimensions  : 12, 6  (geometries, attributes)
@@ -196,8 +209,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target raster_elevs
-#> ● completed target raster_elevs [0.14 seconds, 36.423 kilobytes]
-#> ▶ ended pipeline [0.33 seconds]
+#> ● completed target raster_elevs [0.065 seconds, 37.904 kilobytes]
+#> ▶ ended pipeline [0.148 seconds]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
@@ -228,8 +241,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> ▶ dispatched target test_stars
-#> ● completed target test_stars [0.053 seconds, 49.9 kilobytes]
-#> ▶ ended pipeline [0.192 seconds]
+#> ● completed target test_stars [0.02 seconds, 49.9 kilobytes]
+#> ▶ ended pipeline [0.069 seconds]
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
 #>             Min. 1st Qu. Median     Mean 3rd Qu. Max.
@@ -243,9 +256,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 ## Code of Conduct
 
 Please note that the geotargets project is released with a [Contributor
-Code of
-Conduct](https://contributor-covenant.org/version/2/1/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+Code of Conduct](https://ropensci.org/code-of-conduct/). By contributing
+to this project, you agree to abide by its terms.
 
 ## Acknowledgements
 
