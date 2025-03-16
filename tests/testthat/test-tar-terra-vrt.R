@@ -10,7 +10,7 @@ targets::tar_test("tar_terra_vrt() works", {
                 rt, c(r, r2),
                 function(x) tile_grid(x, ncol = 2, nrow = 2)
             ),
-            tar_terra_vrt(r3, rt)
+            tar_terra_vrt(r3, terra::sprc(rt))
         )
     })
 
