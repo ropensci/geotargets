@@ -69,6 +69,7 @@ targets::tar_test("tar_stars(mdim=TRUE) works", {
 
 
 targets::tar_test("tar_stars(mdim=TRUE, ncdf=TRUE) works", {
+  skip_if_not_installed("ncmeta")
   targets::tar_script({
     list(geotargets::tar_stars(test_stars_mdim_ncdf,
       {
