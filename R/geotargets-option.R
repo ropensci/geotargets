@@ -12,6 +12,11 @@
 #'   driver supports a unique set of creation options. For example, with the
 #'   default `"GTiff"` driver:
 #'   <https://gdal.org/drivers/raster/gtiff.html#creation-options>.
+#' @param gdal_raster_data_type character; Data type for writing raster file.
+#'   One of: `"INT1U"`, `"INT2U"`, `"INT4U"`, `"INT8U"`, `"INT2S"`, `"INT4S"`,
+#'   `"INT8S"`, `"FLT4S"`, `"FLT8S"` (for terra), or `"Byte"`, `"UInt16"`,
+#'   `"UInt32"`, `"UInt64"`, `"Int16"`, `"Int32"`, `"Int64"`, `"Float32"`,
+#'   `"Float64"` (for stars).
 #' @param gdal_vector_driver character, length 1; set the file type used for
 #' vector data in target store (default: `"GeoJSON"`).
 #' @param gdal_vector_creation_options character; set the GDAL layer creation
@@ -89,6 +94,7 @@
 geotargets_option_set <- function(
   gdal_raster_driver = NULL,
   gdal_raster_creation_options = NULL,
+  gdal_raster_data_type = NULL,
   gdal_vector_driver = NULL,
   gdal_vector_creation_options = NULL,
   terra_preserve_metadata = NULL
@@ -100,6 +106,9 @@ geotargets_option_set <- function(
 
   gdal_raster_creation_options <- gdal_raster_creation_options %||%
     geotargets_option_get("gdal.raster.creation.options")
+
+  gdal_raster_data_type <- gdal_raster_data_type %||%
+    geotargets_option_get("gdal.raster.data.type")
 
   gdal_vector_driver <- gdal_vector_driver %||%
     geotargets_option_get("gdal.vector.driver")
@@ -113,6 +122,7 @@ geotargets_option_set <- function(
   options(
     "geotargets.gdal.raster.driver" = gdal_raster_driver,
     "geotargets.gdal.raster.creation.options" = gdal_raster_creation_options,
+    "geotargets.gdal.raster.data.type" = gdal_raster_data_type,
     "geotargets.gdal.vector.driver" = gdal_vector_driver,
     "geotargets.gdal.vector.creation.options" = gdal_vector_creation_options,
     "geotargets.terra.preserve.metadata" = terra_preserve_metadata
@@ -135,6 +145,7 @@ geotargets_option_get <- function(name) {
       c(
         "geotargets.gdal.raster.driver",
         "geotargets.gdal.raster.creation.options",
+        "geotargets.gdal.raster.data.type",
         "geotargets.gdal.vector.driver",
         "geotargets.gdal.vector.creation.options",
         "geotargets.terra.preserve.metadata"
