@@ -10,6 +10,7 @@ tar_terra_rast(
   pattern = NULL,
   filetype = geotargets_option_get("gdal.raster.driver"),
   gdal = geotargets_option_get("gdal.raster.creation.options"),
+  datatype = geotargets_option_get("gdal.raster.data.type"),
   preserve_metadata = geotargets_option_get("terra.preserve.metadata"),
   ...,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -43,6 +44,10 @@ to \code{\link[terra:writeRaster]{terra::writeRaster()}}}
 
 \item{gdal}{character. GDAL driver specific datasource creation options
 passed to \code{\link[terra:writeRaster]{terra::writeRaster()}}}
+
+\item{datatype}{character. Data type passed to \code{\link[terra:writeRaster]{terra::writeRaster()}}. One
+of: \code{"INT1U"}, \code{"INT2U"}, \code{"INT4U"}, \code{"INT8U"}, \code{"INT2S"}, \code{"INT4S"},
+\code{"INT8S"}, \code{"FLT4S"}, \code{"FLT8S"}}
 
 \item{preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
