@@ -1,7 +1,8 @@
 # geotargets (development version)
 
 * bugfix by @brownag that fixes use of `file.rename()` in `tar_terra_rast(..., preserve_metadata = "zip")`, which does not work when the temporary directory is on a different partition. (#121, PR #122).
-
+* Created `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file
+  
 # geotargets 0.2.0 (29 November 2024)
 
 * Created `tar_stars()` and `tar_stars_proxy()` that create `stars` and `stars_proxy` objects, respectively.
