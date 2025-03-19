@@ -17,7 +17,7 @@
 #'
 #' @inheritParams targets::tar_target
 #' @importFrom rlang %||% arg_match0
-#' @seealso [geotargets::tar_terra_tiles()]
+#' @seealso [tar_terra_tiles()]
 #' @export
 #' @examples
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
