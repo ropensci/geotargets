@@ -4,6 +4,8 @@
 * Fixed examples for `tar_terra_tiles()`, `tile_grid()`, `tar_terra_sds()`, and `tar_terra_sprc()` as reported by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675)
 * Added details to the documentation for `tar_terra_tiles()` (suggested by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675))
 * completed ropensci review and transferred ownership to ropensci
+* `tar_terra_rast()` gains a `datatype` argument and `tar_stars()` gains a `type` argument. Both default to the geotargets option `"gdal.raster.data.type"` (when set).
+* Additional arguments `...` are now passed to the target "write" method: `terra::writeRaster()` for `tar_terra_rast()`, `terra::writeVector()` for `tar_terra_vect()` and `stars::write_stars()` for `tar_stars()`
 
 # geotargets 0.2.0 (29 November 2024)
 
