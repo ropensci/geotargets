@@ -1,11 +1,28 @@
 #' Split a raster into tiles that can be iterated over with dynamic branching
 #'
+#' Creates two targets, a list of extents defining tiles and a downstream
+#' pattern that maps over these extents to create a list of `SpatRaster` objects
+#' that can be used with [dynamic
+#' branching](https://books.ropensci.org/targets/dynamic.html).
+#'
+#' @details When a raster is too large or too high resolution to work on
+#'   in-memory, one possible solution is to iterate over tiles. Raster tiles can
+#'   then be operated on one at a time, or possibly in parallel if resources are
+#'   available, and then the results can be aggregated. A natural way to do this
+#'   in the context of a `targets` pipeline is to split the raster into multiple
+#'   raster targets with dynamic branching so that downstream targets can be
+#'   applied to each branch of the upstream target with the `pattern` argument
+#'   to `tar_terra_rast()` or `tar_target()`. `tar_terra_tiles()` facilitates
+#'   creation of such a dynamically branched target. This workflow isn't
+#'   appropriate for operations that aggregate spatially, only pixel-wise
+#'   operations (possibly aggregating across multiple layers).
+#'
 #' This target factory is useful when a raster is too large or too high
 #' resolution to work on in-memory. It can instead be split into tiles that can
 #' be iterated over using dynamic branching.
-#' @param name Symbol, name of the target. A target
-#'   name must be a valid name for a symbol in R, and it
-#'   must not start with a dot. See [targets::tar_target()] for more information.
+#' @param name Symbol, name of the target. A target name must be a valid name
+#'   for a symbol in R, and it must not start with a dot. See
+#'   [targets::tar_target()] for more information.
 #' @param raster a `SpatRaster` object to be split into tiles.
 #' @param tile_fun a helper function that returns a list of numeric vectors such
 #'   as [tile_grid()], [tile_n()] or [tile_blocksize] specified in one of the
@@ -37,6 +54,8 @@
 #' @export
 #'
 #' @examples
+#' # For CRAN. Ensures these examples run under certain conditions.
+#' # To run this locally, run the code inside this if statement
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 #'   targets::tar_dir({
 #'     targets::tar_script({
@@ -56,8 +75,7 @@
 #'             tar_terra_tiles(
 #'                 name = rast_split,
 #'                 raster = my_map,
-#'                 ncol = 2,
-#'                 nrow = 2
+#'                 tile_fun = \(x) tile_grid(x, ncol = 2, nrow = 2)
 #'             )
 #'         )
 #'     })
@@ -227,7 +245,9 @@ tar_terra_tiles_raw <- function(
 #' terra::ext(r2)
 #'
 set_window <- function(raster, window) {
-    raster_out <- c(raster) #forces copying the raster, not just the R object pointing to the same raster in memory
+    # forces copying the raster, not just the R object pointing to the same
+    # raster in memory
+    raster_out <- c(raster)
     terra::window(raster_out) <- window
     raster_out
 }
@@ -294,9 +314,13 @@ set_window <- function(raster, window) {
 #'     tar_terra_tiles(
 #'         name = rast_split_2blocks,
 #'         raster = my_map,
-#'         tile_fun = \(x) tile_blocksize(x, n_blocks_row = 2, n_blocks_col = 1),
+#'         tile_fun = \(x) tile_blocksize(
+#'           x,
+#'           n_blocks_row = 2,
+#'           n_blocks_col = 1
+#'           ),
 #'         description = "Each tile is 2 blocks tall, 1 block wide"
-#'     )
+#'     ),
 #'     tar_terra_tiles(
 #'         name = rast_split_grid,
 #'         raster = my_map,
@@ -312,6 +336,8 @@ set_window <- function(raster, window) {
 #' )
 #' }
 tile_grid <- function(raster, ncol, nrow) {
+    check_is_integerish(ncol)
+    check_is_integerish(nrow)
     template <- terra::rast(
         x = terra::ext(raster),
         ncol = ncol,
@@ -325,7 +351,7 @@ tile_grid <- function(raster, ncol, nrow) {
     n_tiles <- seq_len(nrow(tile_ext))
     tile_list <- lapply(
         n_tiles,
-        \(i) tile_ext[i,]
+        \(i) tile_ext[i, ]
     )
     tile_list
 }
@@ -333,15 +359,17 @@ tile_grid <- function(raster, ncol, nrow) {
 #' @export
 #' @rdname tile_helpers
 tile_blocksize <- function(raster, n_blocks_row = 1, n_blocks_col = 1) {
+    check_is_integerish(n_blocks_row)
+    check_is_integerish(n_blocks_col)
     tile_ext <-
         terra::getTileExtents(
             raster,
-            terra::fileBlocksize(raster)[1,] * c(n_blocks_row, n_blocks_col)
+            terra::fileBlocksize(raster)[1, ] * c(n_blocks_row, n_blocks_col)
         )
     n_tiles <- seq_len(nrow(tile_ext))
     tile_list <- lapply(
         n_tiles,
-        \(i) tile_ext[i,]
+        \(i) tile_ext[i, ]
     )
     tile_list
 }
@@ -349,30 +377,19 @@ tile_blocksize <- function(raster, n_blocks_row = 1, n_blocks_col = 1) {
 #' @export
 #' @rdname tile_helpers
 tile_n <- function(raster, n) {
-    if (!rlang::is_integerish(n)) {
-        cli::cli_abort(
-            c(
-                "{.val {n}} must be an integer.",
-                "We see that {.val n} is: {n}"
-                )
-        )
-    }
+    check_is_integerish(n)
     sq <- sqrt(n)
     sq_round <- floor(sq)
-    quotient <- n/sq_round
+    quotient <- n / sq_round
     is_even <- rlang::is_integerish(quotient)
     is_odd <- !is_even
     if (is_even) {
         nrow <- sq_round
-        ncol <- n/nrow
+        ncol <- n / nrow
     }
     if (is_odd) {
         nrow <- sq_round
         ncol <- ceiling(quotient) #round up
-
-        # #alternatively, only use rows??
-        # nrow <- n
-        # ncol <- 1
     }
 
     cli::cli_inform("creating {nrow} * {ncol} = {nrow*ncol} tile extents\n")
@@ -390,7 +407,7 @@ tile_n <- function(raster, n) {
     n_tiles <- seq_len(nrow(tile_ext))
     tile_list <- lapply(
         n_tiles,
-        \(i) tile_ext[i,]
+        \(i) tile_ext[i, ]
     )
     tile_list
 }

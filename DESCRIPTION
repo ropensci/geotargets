@@ -1,6 +1,6 @@
 Package: geotargets
-Title: 'Targets' Extensions for Geospatial Formats
-Version: 0.2.0.9000
+Title: 'Targets' Extensions for Geographic Spatial Formats
+Version: 0.3.0
 Authors@R: c(
     person(
       given = "Nicholas", 
@@ -22,20 +22,22 @@ Authors@R: c(
       comment = c(ORCID = "0000-0002-4565-533X")
     )
     )
-Description: Provides extensions for various geospatial file formats, 
-  such as shapefiles and rasters. Currently provides support for the 'terra'
-  geospatial formats. See the vignettes for worked examples, demonstrations, 
-  and explanations of how to use the various package extensions.
+Description: Provides extensions for various geographic spatial file formats, 
+  such as shape files and rasters. Currently provides support for the 'terra'
+  geographic spatial formats. See the vignettes for worked examples,
+  demonstrations, and explanations of how to use the various package extensions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Depends:
+    R (>= 4.1.0)
 Imports: 
     targets (>= 1.8.0),
     rlang (>= 1.1.3),
     cli (>= 3.6.2),
-    terra (>= 1.7.71),
+    terra (>= 1.8-10),
     withr (>= 3.0.0),
     zip,
     lifecycle
@@ -47,8 +49,9 @@ Suggests:
     sf,
     stars,
     testthat (>= 3.0.0),
-    fs
+    fs,
+    spelling
 Config/testthat/edition: 3
-URL: https://github.com/njtierney/geotargets, http://geotargets.njtierney.com
-BugReports: https://github.com/njtierney/geotargets/issues
+URL: https://github.com/ropensci/geotargets, https://docs.ropensci.org/geotargets/
+BugReports: https://github.com/ropensci/geotargets/issues
 VignetteBuilder: knitr

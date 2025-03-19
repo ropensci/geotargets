@@ -7,7 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| label: settings
+#| include: false
 # With the root.dir option below,
 # this vignette runs the R code in a temporary directory
 # so new files are written to temporary storage
@@ -21,13 +23,11 @@ knitr::opts_chunk$set(
   fig.height = 5,
   fig.width = 5
 )
-if (identical(Sys.getenv("NOT_CRAN", unset = "false"), "false")) {
-  knitr::opts_chunk$set(eval = FALSE)
-}
 Sys.setenv(TAR_ASK = "false")
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(geotargets)
 library(targets)
 library(terra)
@@ -47,6 +47,7 @@ The **extent** describes the four points that cover the area of a raster.
 The extent of a raster, `r`, is printed in the summary:
 
 ```{r}
+#| label: example-spatraster
 # example SpatRaster
 f <- system.file("ex/elev.tif", package = "terra")
 r <- rast(f)
@@ -56,6 +57,7 @@ r
 But we can get the extent with `ext` (**ext**ent):
 
 ```{r}
+#| label: get-ext
 r_ext <- ext(r)
 r_ext
 ```
@@ -63,7 +65,7 @@ r_ext
 Which maps onto the four corners of the raster here:
 
 ```{r}
-# some plot helpers
+#| label: plot-helpers
 rect_extent <- function(x, ...) {
   rect(x[1], x[3], x[2], x[4], ...)
 }
@@ -73,6 +75,7 @@ plot_extents <- function(x, ...) {
 ```
 
 ```{r}
+#| label: show-four-corners
 extend(r, 5) |> plot()
 lines(r_ext, col = "hotpink", lty = 2)
 points(r_ext, col = "hotpink", pch = 16)
@@ -100,11 +103,13 @@ We can use `tile_n()`, which is the simplest of the three.
 It produces *about* `n` tiles in a grid.
 
 ```{r}
+#| label: tile-n-4
 r_tile_4 <- tile_n(r, 4)
 r_tile_4
 ```
 
 ```{r}
+#| label: plot-tile-4-6
 plot(r)
 plot_extents(r_tile_4)
 plot(r)
@@ -117,6 +122,7 @@ For more control, use `tile_grid()`, which allows specification of the number of
 Here we are specify that we want three columns and 1 row:
 
 ```{r}
+#| label: plot-tile-grids
 r_grid_3x1 <- tile_grid(r, ncol = 3, nrow = 1)
 r_grid_3x1
 plot(r)
@@ -134,6 +140,7 @@ Tiling by multiples of block size may therefore be more efficient because only o
 You can find the blocksize with `fileBlocksize`:
 
 ```{r}
+#| label: file-block-size
 fileBlocksize(r)
 ```
 
@@ -144,12 +151,14 @@ The `tile_blocksize` function is similar to `tile_grid`, except instead of sayin
 If we just run `tile_blocksize()` on `r` we get the extents of the specified blocksize:
 
 ```{r}
+#| label: tile-block-size
 tile_blocksize(r)
 ```
 
 Which is the same as specifying blocksize for row and column at unit 1:
 
 ```{r}
+#| label: tile-blocksize-plot
 r_block_size_1x1 <- tile_blocksize(r, n_blocks_row = 1, n_blocks_col = 1)
 r_block_size_1x1
 plot(r)
@@ -164,6 +173,7 @@ Here the column block size is the full width of the raster.
 So we could instead have the blocksize extent be written out to 2 blocks in a row, and 1 block size for the columns:
 
 ```{r}
+#| label: tile-block-size-plot-extents
 r_block_size_2x1 <- tile_blocksize(r, n_blocks_row = 2, n_blocks_col = 1)
 r_block_size_2x1
 plot(r)
@@ -172,7 +182,9 @@ plot_extents(r_block_size_2x1)
 
 This only works when the `SpatRaster` points to a file—in-memory rasters have no inherent block size.
 
-```{r error=TRUE}
+```{r}
+#| label: demo-error
+#| error: true
 sources(r)
 # force into memory
 r2 <- r + 0
@@ -181,16 +193,22 @@ sources(r2)
 tile_blocksize(r2)
 ```
 
+# How to run targets examples from vignettes
+
+The way targets typically works is you write a file named `_targets.R`, which describes the pipeline. See for example, the [`_targets.R` file in the demo-geotargets repo](https://github.com/njtierney/demo-geotargets/blob/main/_targets.R).
+
+However, in order to demonstrate many of the features with `targets` and `geotargets`, we don't want to have to create many `_targets.R` files. So instead we use a targets function [`targets::tar_script()`](https://docs.ropensci.org/targets/reference/tar_script.html). This allows you to write the code you would have put in a `_targets.R` file. 
+
+What this means for you is you can essentially just "copy and paste" the examples we provide in this vignette. When running the `tar_script` code, it will ask you each time if you want to overwrite the `_targets.R` file. This means if you are exploring these examples and copying the entire examples, it is worthwhile doing this in a separate repository to avoid overwriting your own `_targets.R` file.
+
 ## Example targets pipeline
 
 When developing a `targets` pipeline using `tar_terra_tiles()` with `tile_blocksize()`, it's a good idea to figure out how many tiles `tile_blocksize()` will create before implementing `tar_terra_tiles()`.
 We'll start by making a bigger raster to experiment with using `terra::disagg()`, (which makes a higher resolution raster by breaking the pixels into smaller pixels), and making multiple layers.
 
 ```{r}
-#| label: tar_script
-#| echo: false
-#| eval: true
-
+#| label: tar-script
+#| echo: true
 targets::tar_script({
   # contents of _targets.R
   library(targets)
@@ -218,36 +236,7 @@ targets::tar_script({
 ```
 
 ```{r}
-#| label: _targets
-#| eval: false
-#| echo: true
-# contents of _targets.R
-library(targets)
-library(geotargets)
-library(terra)
-geotargets_option_set(gdal_raster_driver = "COG")
-list(
-  tar_target(
-    raster_file,
-    system.file("ex/elev.tif", package = "terra"),
-    format = "file"
-  ),
-  tar_terra_rast(
-    r,
-    disagg(rast(raster_file), fact = 10)
-  ),
-  # add more layers
-  tar_terra_rast(
-    r_big,
-    c(r, r + 100, r * 10, r / 2),
-    memory = "transient"
-  )
-)
-```
-
-```{r}
-#| label: tar_make
-#| eval: true
+#| label: tar-make
 #| echo: true
 
 tar_make()
@@ -270,9 +259,9 @@ The process that happens from here can be thought of as `split-apply-combine`.
     -   In this case we use `tar_terra_rast()` and use `merge()` on the tiles.
 
 ```{r}
-#| label: tar_script2
+#| label: tar-script2
 #| eval: true
-#| echo: false
+#| echo: true
 targets::tar_script({
   # contents of _targets.R
   library(targets)
@@ -295,18 +284,21 @@ targets::tar_script({
       c(r, r + 100, r * 10, r / 2),
       memory = "transient"
     ),
+    # split
     tar_terra_tiles(
       tiles,
       raster = r_big,
       tile_fun = tile_blocksize,
       description = "split raster into tiles"
     ),
+    # apply
     tar_terra_rast(
       tiles_mean,
       app(tiles, \(x) mean(x, na.rm = TRUE)),
       pattern = map(tiles),
       description = "some computationaly intensive task performed on each tile"
     ),
+    # combine
     tar_terra_rast(
       merged_mean,
       merge(sprc(tiles_mean)),
@@ -317,52 +309,7 @@ targets::tar_script({
 ```
 
 ```{r}
-#| label: _targets2
-#| eval: false
-#| echo: true
-# contents of _targets.R
-library(targets)
-library(geotargets)
-library(terra)
-geotargets_option_set(gdal_raster_driver = "COG")
-tar_option_set(memory = "transient")
-list(
-  tar_target(
-    raster_file,
-    system.file("ex/elev.tif", package = "terra"),
-    format = "file"
-  ),
-  tar_terra_rast(
-    r,
-    disagg(rast(raster_file), fact = 10)
-  ),
-  tar_terra_rast(
-    r_big,
-    c(r, r + 100, r * 10, r / 2),
-    memory = "transient"
-  ),
-  tar_terra_tiles(
-    tiles,
-    raster = r_big,
-    tile_fun = tile_blocksize,
-    description = "split raster into tiles"
-  ),
-  tar_terra_rast(
-    tiles_mean,
-    app(tiles, \(x) mean(x, na.rm = TRUE)),
-    pattern = map(tiles),
-    description = "some computationaly intensive task performed on each tile"
-  ),
-  tar_terra_rast(
-    merged_mean,
-    merge(sprc(tiles_mean)),
-    description = "merge tiles into a single SpatRaster"
-  )
-)
-```
-
-```{r}
-#| label: tar_make2
+#| label: tar-make2
 #| eval: true
 #| echo: true
 

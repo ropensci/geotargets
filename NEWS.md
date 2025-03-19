@@ -1,8 +1,10 @@
-# geotargets (development version)
-
-* bugfix by @brownag that fixes use of `file.rename()` in `tar_terra_rast(..., preserve_metadata = "zip")`, which does not work when the temporary directory is on a different partition. (#121, PR #122).
+# geotargets 0.3.0 (12 March 2025)
+* Bugfix by @brownag that fixes use of `file.rename()` in `tar_terra_rast(..., preserve_metadata = "zip")`, which does not work when the temporary directory is on a different partition. (#121, PR #122).
+* Fixed examples for `tar_terra_tiles()`, `tile_grid()`, `tar_terra_sds()`, and `tar_terra_sprc()` as reported by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675)
+* Added details to the documentation for `tar_terra_tiles()` (suggested by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675))
+* Completed ropensci review and transferred ownership to ropensci
 * Created `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file
-  
+
 # geotargets 0.2.0 (29 November 2024)
 
 * Created `tar_stars()` and `tar_stars_proxy()` that create `stars` and `stars_proxy` objects, respectively.
