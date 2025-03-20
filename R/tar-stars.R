@@ -18,6 +18,9 @@
 #'  [stars::write_stars()]. See [sf::st_drivers()].
 #' @param options character. GDAL driver specific datasource creation options
 #'  passed to [stars::write_stars()].
+#' @param type character. character. Data type passed to [stars::write_stars()].
+#'   One of: `"Byte"`, `"UInt16"`, `"UInt32"`, `"UInt64"`, `"Int16"`, `"Int32"`,
+#'   `"Int64"`, `"Float32"`, `"Float64"`.
 #' @param proxy logical. Passed to [stars::read_stars()]. If `TRUE` the target
 #'  will be read as an object of class `stars_proxy`. Otherwise, the object is
 #'  class `stars`.
@@ -49,7 +52,8 @@
 #'           stars_example,
 #'           stars::read_stars(
 #'           system.file("tif", "olinda_dem_utm25s.tif", package = "stars")
-#'           )
+#'           ),
+#'           type = "Int64"
 #'         )
 #'       )
 #'     })
@@ -66,6 +70,7 @@ tar_stars <- function(
         ncdf = FALSE,
         driver = geotargets_option_get("gdal.raster.driver"),
         options = geotargets_option_get("gdal.raster.creation.options"),
+        type = geotargets_option_get("gdal.raster.data.type"),
         ...,
         tidy_eval = targets::tar_option_get("tidy_eval"),
         packages = targets::tar_option_get("packages"),
@@ -112,6 +117,7 @@ tar_stars <- function(
     ncdf = ncdf,
     driver = driver,
     options = options,
+    type = type,
     packages = packages,
     library = library,
     repository = repository,
@@ -138,6 +144,7 @@ tar_stars_proxy <- function(
         ncdf = FALSE,
         driver = geotargets_option_get("gdal.raster.driver"),
         options = geotargets_option_get("gdal.raster.creation.options"),
+        type = geotargets_option_get("gdal.raster.data.type"),
         ...,
         tidy_eval = targets::tar_option_get("tidy_eval"),
         packages = targets::tar_option_get("packages"),
@@ -184,6 +191,7 @@ tar_stars_proxy <- function(
     ncdf = ncdf,
     driver = driver,
     options = options,
+    type = type,
     ...,
     packages = packages,
     library = library,
@@ -213,6 +221,7 @@ tar_stars_raw <- function(
         ncdf = FALSE,
         driver = geotargets_option_get("gdal.raster.driver"),
         options = geotargets_option_get("gdal.raster.creation.options"),
+        type = geotargets_option_get("gdal.raster.data.type"),
         ...,
         tidy_eval = targets::tar_option_get("tidy_eval"),
         packages = targets::tar_option_get("packages"),
@@ -238,6 +247,11 @@ tar_stars_raw <- function(
 
   driver <- rlang::arg_match0(driver, drv$name)
 
+  arglist <- list(...)
+  if (!is.null(type)) {
+    arglist <- c(list(type = type), arglist)
+  }
+
   targets::tar_target_raw(
     name = name,
     command = command,
@@ -255,30 +269,26 @@ tar_stars_raw <- function(
         }
       },
       write = function(object, path) {
-        if (mdim) {
-          stars::write_mdim(
-            object,
-            path,
-            overwrite = TRUE,
-            driver = driver,
-            options = options
-          )
-        } else {
-          stars::write_stars(
-            object,
-            path,
-            overwrite = TRUE,
-            driver = driver,
-            options = options
-          )
-        }
+        FUN <- ifelse(mdim, stars::write_mdim, stars::write_stars)
+        do.call(FUN,
+                c(
+                  list(
+                    object,
+                    path,
+                    overwrite = TRUE,
+                    driver = driver,
+                    options = options
+                  ),
+                  args
+                ))
       },
       substitute = list(
         ncdf = ncdf,
         mdim = mdim,
         proxy = proxy,
         driver = driver,
-        options = options
+        options = options,
+        args = arglist
       )
     ),
     repository = repository,

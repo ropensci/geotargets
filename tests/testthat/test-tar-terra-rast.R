@@ -5,13 +5,15 @@ targets::tar_test("tar_terra_rast() works", {
     list(
       geotargets::tar_terra_rast(
         test_terra_rast,
-        terra::rast(system.file("ex/elev.tif", package = "terra"))
+        terra::rast(system.file("ex/elev.tif", package = "terra")),
+        datatype = "INT4S"
       )
     )
   })
   targets::tar_make()
   x <- targets::tar_read(test_terra_rast)
   expect_s4_class(x, "SpatRaster")
+  expect_identical(terra::datatype(x), "INT4S")
   expect_snapshot(
     x
   )

@@ -8,6 +8,7 @@
 geotargets_option_set(
   gdal_raster_driver = NULL,
   gdal_raster_creation_options = NULL,
+  gdal_raster_data_type = NULL,
   gdal_vector_driver = NULL,
   gdal_vector_creation_options = NULL,
   terra_preserve_metadata = NULL
@@ -18,14 +19,20 @@ geotargets_option_get(name)
 \arguments{
 \item{gdal_raster_driver}{character, length 1; set the driver used for raster
 data in target store (default: \code{"GTiff"}). Options for driver names can be
-found here: \url{https://gdal.org/en/stable/drivers/raster/index.html}.}
+found here: \url{https://gdal.org/drivers/raster/index.html}.}
 
 \item{gdal_raster_creation_options}{character; set the GDAL creation options
 used when writing raster files to target store (default: \code{""}). You may
 specify multiple values e.g. \code{c("COMPRESS=DEFLATE", "TFW=YES")}. Each GDAL
 driver supports a unique set of creation options. For example, with the
 default \code{"GTiff"} driver:
-\url{https://gdal.org/en/stable/drivers/raster/gtiff.html}.}
+\url{https://gdal.org/drivers/raster/gtiff.html#creation-options}.}
+
+\item{gdal_raster_data_type}{character; Data type for writing raster file.
+One of: \code{"INT1U"}, \code{"INT2U"}, \code{"INT4U"}, \code{"INT8U"}, \code{"INT2S"}, \code{"INT4S"},
+\code{"INT8S"}, \code{"FLT4S"}, \code{"FLT8S"} (for terra), or \code{"Byte"}, \code{"UInt16"},
+\code{"UInt32"}, \code{"UInt64"}, \code{"Int16"}, \code{"Int32"}, \code{"Int64"}, \code{"Float32"},
+\code{"Float64"} (for stars).}
 
 \item{gdal_vector_driver}{character, length 1; set the file type used for
 vector data in target store (default: \code{"GeoJSON"}).}
@@ -36,7 +43,7 @@ options used when writing vector files to target store (default:
 \code{c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")}. Each GDAL driver supports
 a unique set of creation options. For example, with the default \code{"GeoJSON"}
 driver:
-\url{https://gdal.org/en/stable/drivers/vector/geojson.html}}
+\url{https://gdal.org/drivers/vector/geojson.html#layer-creation-options}}
 
 \item{terra_preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
