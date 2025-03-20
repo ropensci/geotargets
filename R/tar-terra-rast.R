@@ -191,16 +191,19 @@ tar_rast_write <- function(filetype, gdal, datatype, preserve_metadata, args) {
       tmp <- withr::local_tempdir()
       raster_tmp_file <- file.path(tmp, basename(path))
       zip_tmp_file <- file.path(tmp, "object.zip")
-      do.call(terra::writeRaster, c(
-        list(
-          x = object,
-          filename = raster_tmp_file,
-          filetype = filetype,
-          overwrite = TRUE,
-          gdal = gdal
-        ),
-        args
-      ))
+      do.call(
+        terra::writeRaster,
+        c(
+          list(
+            x = object,
+            filename = raster_tmp_file,
+            filetype = filetype,
+            overwrite = TRUE,
+            gdal = gdal
+          ),
+          args
+        )
+      )
       # package files into a zip file using `zip::zip()`
       raster_files <- list.files(path = tmp, full.names = TRUE)
       zip::zip(
@@ -214,16 +217,19 @@ tar_rast_write <- function(filetype, gdal, datatype, preserve_metadata, args) {
       file.copy(zip_tmp_file, path)
     },
     drop = function(object, path) {
-      do.call(terra::writeRaster, c(
-        list(
-          object,
-          filename = path,
-          filetype = filetype,
-          overwrite = TRUE,
-          gdal = gdal
-        ),
-        args
-      ))
+      do.call(
+        terra::writeRaster,
+        c(
+          list(
+            object,
+            filename = path,
+            filetype = filetype,
+            overwrite = TRUE,
+            gdal = gdal
+          ),
+          args
+        )
+      )
     }
   )
 }
