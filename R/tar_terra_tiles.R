@@ -50,7 +50,7 @@
 #'   extents and a downstream pattern that maps over these extents to create a
 #'   list of SpatRaster objects.
 #'
-#' @seealso [tile_n()], [tile_grid()], [tile_blocksize()], [tar_terra_rast()]
+#' @seealso [tile_n()], [tile_grid()], [tile_blocksize()], [tar_terra_rast()], [tar_terra_vrt()]
 #' @export
 #'
 #' @examples
