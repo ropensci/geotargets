@@ -14,6 +14,7 @@ tar_stars(
   ncdf = FALSE,
   driver = geotargets_option_get("gdal.raster.driver"),
   options = geotargets_option_get("gdal.raster.creation.options"),
+  type = geotargets_option_get("gdal.raster.data.type"),
   ...,
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
@@ -39,6 +40,7 @@ tar_stars_proxy(
   ncdf = FALSE,
   driver = geotargets_option_get("gdal.raster.driver"),
   options = geotargets_option_get("gdal.raster.creation.options"),
+  type = geotargets_option_get("gdal.raster.data.type"),
   ...,
   tidy_eval = targets::tar_option_get("tidy_eval"),
   packages = targets::tar_option_get("packages"),
@@ -70,7 +72,7 @@ for a symbol in R, and it must not start with a dot. See
 will be read as an object of class \code{stars_proxy}. Otherwise, the object is
 class \code{stars}.}
 
-\item{mdim}{logical. Use the \href{https://gdal.org/en/stable/user/multidim_raster_data_model.html}{Multidimensional Raster Data Model} via
+\item{mdim}{logical. Use the \href{https://gdal.org/user/multidim_raster_data_model.html}{Multidimensional Raster Data Model} via
 \code{\link[stars:mdim]{stars::write_mdim()}}? Default: \code{FALSE}. Only supported for some drivers,
 e.g. \code{"netCDF"} or \code{"Zarr"}.}
 
@@ -83,6 +85,10 @@ e.g. \code{"netCDF"} or \code{"Zarr"}.}
 
 \item{options}{character. GDAL driver specific datasource creation options
 passed to \code{\link[stars:write_stars]{stars::write_stars()}}.}
+
+\item{type}{character. character. Data type passed to \code{\link[stars:write_stars]{stars::write_stars()}}.
+One of: \code{"Byte"}, \code{"UInt16"}, \code{"UInt32"}, \code{"UInt64"}, \code{"Int16"}, \code{"Int32"},
+\code{"Int64"}, \code{"Float32"}, \code{"Float64"}.}
 
 \item{...}{Additional arguments not yet used.}
 
@@ -280,7 +286,8 @@ if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
           stars_example,
           stars::read_stars(
           system.file("tif", "olinda_dem_utm25s.tif", package = "stars")
-          )
+          ),
+          type = "Int64"
         )
       )
     })
