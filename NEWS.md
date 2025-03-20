@@ -3,9 +3,9 @@
 * Fixed examples for `tar_terra_tiles()`, `tile_grid()`, `tar_terra_sds()`, and `tar_terra_sprc()` as reported by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675)
 * Added details to the documentation for `tar_terra_tiles()` (suggested by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675))
 * Completed ropensci review and transferred ownership to ropensci
-* Created `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file
 * `tar_terra_rast()` gains a `datatype` argument and `tar_stars()` gains a `type` argument. Both default to the geotargets option `"gdal.raster.data.type"` (when set).
 * Additional arguments `...` are now passed to the target "write" method: `terra::writeRaster()` for `tar_terra_rast()`, `terra::writeVector()` for `tar_terra_vect()` and `stars::write_stars()` for `tar_stars()` (Thanks to @brownag in #137, resolves #132 and #127)
+* Added `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file (Thanks to @brownag in #138)
 
 # geotargets 0.2.0 (29 November 2024)
 
