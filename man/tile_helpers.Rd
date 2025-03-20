@@ -62,8 +62,8 @@ tile_grid(r, ncol = 2, nrow = 2)
 tile_blocksize(r)
 tile_n(r, 8)
 
-\dontrun{
-#usage with tar_terra_tiles
+\donttest{
+#Example usage with tar_terra_tiles
 list(
     tar_terra_rast(
         my_map,
