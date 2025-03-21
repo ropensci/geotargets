@@ -103,18 +103,23 @@ tar_terra_rast <- function(
 
   # various methods for packaging geospatial data and auxiliary files
   preserve_metadata <- preserve_metadata %||% "drop"
-  preserve_metadata <- rlang::arg_match0(preserve_metadata, c("drop", "zip", "gdalraster_sozip"))
+  preserve_metadata <- rlang::arg_match0(
+    preserve_metadata,
+    c("drop", "zip", "gdalraster_sozip")
+  )
 
   # ensure that user-passed `resources` doesn't include `custom_format`
   check_user_resources(resources)
 
   if (preserve_metadata == "gdalraster_sozip") {
-      check_pkg_installed("gdalraster")
+    check_pkg_installed("gdalraster")
   }
 
   # ensure that user-passed `resources` doesn't include `custom_format`
   if ("custom_format" %in% names(resources)) {
-      cli::cli_abort("{.val custom_format} cannot be supplied to targets created with {.fn tar_terra_rast}")
+    cli::cli_abort(
+      "{.val custom_format} cannot be supplied to targets created with {.fn tar_terra_rast}"
+    )
   }
 
   name <- targets::tar_deparse_language(substitute(name))
@@ -180,12 +185,12 @@ tar_rast_read <- function(preserve_metadata) {
   switch(
     preserve_metadata,
     zip = function(path) {
-        tmp <- tempdir()
-        # NOTE: cannot use withr::local_tempdir() because the unzipped files need
-        # to persist so that the resulting `SpatRaster` object doesn't have a
-        # broken file pointer
-        zip::unzip(zipfile = path, exdir = tmp)
-        terra::rast(file.path(tmp, basename(path)))
+      tmp <- tempdir()
+      # NOTE: cannot use withr::local_tempdir() because the unzipped files need
+      # to persist so that the resulting `SpatRaster` object doesn't have a
+      # broken file pointer
+      zip::unzip(zipfile = path, exdir = tmp)
+      terra::rast(file.path(tmp, basename(path)))
     },
     gdalraster_sozip = function(path) {
       terra::rast(file.path(paste0("/vsizip/{", path, "}"), basename(path)))
