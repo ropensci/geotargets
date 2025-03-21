@@ -31,7 +31,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Run flir
-        run: flir::lint()
+        run: flir::lint(exclude_linters = "library_call_linter")
         shell: Rscript {0}
         env:
           FLIR_ERROR_ON_LINT: true

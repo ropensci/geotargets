@@ -22,10 +22,7 @@ Authors@R: c(
       comment = c(ORCID = "0000-0002-4565-533X")
     )
     )
-Description: Provides extensions for various geographic spatial file formats, 
-  such as shape files and rasters. Currently provides support for the 'terra'
-  geographic spatial formats. See the vignettes for worked examples,
-  demonstrations, and explanations of how to use the various package extensions.
+Description: Provides extensions for various geographic spatial file formats, such as shape files and rasters. Currently provides support for the 'terra' geographic spatial formats. See the vignettes for worked examples, demonstrations, and explanations of how to use the various package extensions.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-GB

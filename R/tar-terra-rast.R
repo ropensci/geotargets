@@ -25,6 +25,9 @@
 #'   to [terra::writeRaster()]
 #' @param gdal character. GDAL driver specific datasource creation options
 #'   passed to [terra::writeRaster()]
+#' @param datatype character. Data type passed to [terra::writeRaster()]. One
+#'   of: `"INT1U"`, `"INT2U"`, `"INT4U"`, `"INT8U"`, `"INT2S"`, `"INT4S"`,
+#'   `"INT8S"`, `"FLT4S"`, `"FLT8S"`
 #' @param preserve_metadata character. When `"drop"` (default), any
 #'   auxiliary files that would be written by [terra::writeRaster()] containing
 #'   raster metadata such as units and datetimes are lost (note that this does
@@ -39,7 +42,7 @@
 #'   inside [geotargets_option_set()] if you want to set this for the entire
 #'   pipeline.
 #'
-#' @param ... Additional arguments not yet used
+#' @param ... Additional arguments passed to [terra::writeRaster()]
 #'
 #' @inheritParams targets::tar_target
 #'
@@ -74,6 +77,7 @@ tar_terra_rast <- function(
   pattern = NULL,
   filetype = geotargets_option_get("gdal.raster.driver"),
   gdal = geotargets_option_get("gdal.raster.creation.options"),
+  datatype = geotargets_option_get("gdal.raster.data.type"),
   preserve_metadata = geotargets_option_get("terra.preserve.metadata"),
   ...,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -129,6 +133,11 @@ tar_terra_rast <- function(
     tidy_eval = tidy_eval
   )
 
+  arglist <- list(...)
+  if (!is.null(datatype)) {
+    arglist <- c(list(datatype = datatype), arglist)
+  }
+
   targets::tar_target_raw(
     name = name,
     command = command,
@@ -140,14 +149,16 @@ tar_terra_rast <- function(
       write = tar_rast_write(
         filetype = filetype,
         gdal = gdal,
-        preserve_metadata = preserve_metadata
+        preserve_metadata = preserve_metadata,
+        args = args
       ),
       marshal = function(object) terra::wrap(object),
       unmarshal = function(object) terra::unwrap(object),
       substitute = list(
         filetype = filetype,
         gdal = gdal,
-        preserve_metadata = preserve_metadata
+        preserve_metadata = preserve_metadata,
+        args = arglist
       )
     ),
     repository = repository,
@@ -183,7 +194,7 @@ tar_rast_read <- function(preserve_metadata) {
   )
 }
 
-tar_rast_write <- function(filetype, gdal, preserve_metadata) {
+tar_rast_write <- function(filetype, gdal, datatype, preserve_metadata, args) {
   switch(
     preserve_metadata,
     zip = function(object, path) {
@@ -192,12 +203,18 @@ tar_rast_write <- function(filetype, gdal, preserve_metadata) {
       tmp <- withr::local_tempdir()
       raster_tmp_file <- file.path(tmp, basename(path))
       zip_tmp_file <- file.path(tmp, "object.zip")
-      terra::writeRaster(
-        object,
-        filename = raster_tmp_file,
-        filetype = filetype,
-        overwrite = TRUE,
-        gdal = gdal
+      do.call(
+        terra::writeRaster,
+        c(
+          list(
+            x = object,
+            filename = raster_tmp_file,
+            filetype = filetype,
+            overwrite = TRUE,
+            gdal = gdal
+          ),
+          args
+        )
       )
       # package files into a zip file using `zip::zip()`
       raster_files <- list.files(path = tmp, full.names = TRUE)
@@ -212,12 +229,18 @@ tar_rast_write <- function(filetype, gdal, preserve_metadata) {
       file.copy(zip_tmp_file, path)
     },
     drop = function(object, path) {
-      terra::writeRaster(
-        object,
-        filename = path,
-        filetype = filetype,
-        overwrite = TRUE,
-        gdal = gdal
+      do.call(
+        terra::writeRaster,
+        c(
+          list(
+            object,
+            filename = path,
+            filetype = filetype,
+            overwrite = TRUE,
+            gdal = gdal
+          ),
+          args
+        )
       )
     },
     gdalraster_sozip = function(object, path) {

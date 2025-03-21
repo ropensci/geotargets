@@ -276,7 +276,7 @@ if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 }
 }
 \seealso{
-\code{\link[=tile_n]{tile_n()}}, \code{\link[=tile_grid]{tile_grid()}}, \code{\link[=tile_blocksize]{tile_blocksize()}}, \code{\link[=tar_terra_rast]{tar_terra_rast()}}
+\code{\link[=tile_n]{tile_n()}}, \code{\link[=tile_grid]{tile_grid()}}, \code{\link[=tile_blocksize]{tile_blocksize()}}, \code{\link[=tar_terra_rast]{tar_terra_rast()}}, \code{\link[=tar_terra_vrt]{tar_terra_vrt()}}
 }
 \author{
 Eric Scott

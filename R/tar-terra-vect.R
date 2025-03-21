@@ -14,7 +14,7 @@
 #'   to [terra::writeVector()]. See 'Note' for more details.
 #' @param gdal character. GDAL driver specific datasource creation options
 #'   passed to [terra::writeVector()].
-#' @param ... Additional arguments not yet used.
+#' @param ... Additional arguments passed to [terra::writeVector()]
 #' @inheritParams targets::tar_target
 #'
 #' @note The `iteration` argument is unavailable because it is hard-coded to
@@ -53,29 +53,29 @@
 #'   })
 #' }
 tar_terra_vect <- function(
-        name,
-        command,
-        pattern = NULL,
-        filetype = geotargets_option_get("gdal.vector.driver"),
-        gdal = geotargets_option_get("gdal.vector.creation.options"),
-        ...,
-        packages = targets::tar_option_get("packages"),
-        tidy_eval = targets::tar_option_get("tidy_eval"),
-        library = targets::tar_option_get("library"),
-        repository = targets::tar_option_get("repository"),
-        error = targets::tar_option_get("error"),
-        memory = targets::tar_option_get("memory"),
-        garbage_collection = targets::tar_option_get("garbage_collection"),
-        deployment = targets::tar_option_get("deployment"),
-        priority = targets::tar_option_get("priority"),
-        resources = targets::tar_option_get("resources"),
-        storage = targets::tar_option_get("storage"),
-        retrieval = targets::tar_option_get("retrieval"),
-        cue = targets::tar_option_get("cue"),
-        description = targets::tar_option_get("description")
-        ) {
-    filetype <- filetype %||% "GeoJSON"
-    gdal <- gdal %||% "ENCODING=UTF-8"
+  name,
+  command,
+  pattern = NULL,
+  filetype = geotargets_option_get("gdal.vector.driver"),
+  gdal = geotargets_option_get("gdal.vector.creation.options"),
+  ...,
+  packages = targets::tar_option_get("packages"),
+  tidy_eval = targets::tar_option_get("tidy_eval"),
+  library = targets::tar_option_get("library"),
+  repository = targets::tar_option_get("repository"),
+  error = targets::tar_option_get("error"),
+  memory = targets::tar_option_get("memory"),
+  garbage_collection = targets::tar_option_get("garbage_collection"),
+  deployment = targets::tar_option_get("deployment"),
+  priority = targets::tar_option_get("priority"),
+  resources = targets::tar_option_get("resources"),
+  storage = targets::tar_option_get("storage"),
+  retrieval = targets::tar_option_get("retrieval"),
+  cue = targets::tar_option_get("cue"),
+  description = targets::tar_option_get("description")
+) {
+  filetype <- filetype %||% "GeoJSON"
+  gdal <- gdal %||% "ENCODING=UTF-8"
 
   # Check that filetype is available
   drv <- get_gdal_available_driver_list("vector")
@@ -118,14 +118,22 @@ tar_terra_vect <- function(
         }
       },
       write = function(object, path) {
-        terra::writeVector(
-          object,
-          filename = ifelse(filetype == "ESRI Shapefile",
-                            yes = paste0(path, ".shz"),
-                            no = path),
-          filetype = filetype,
-          overwrite = TRUE,
-          options = gdal
+        do.call(
+          terra::writeVector,
+          c(
+            list(
+              x = object,
+              filename = ifelse(
+                filetype == "ESRI Shapefile",
+                yes = paste0(path, ".shz"),
+                no = path
+              ),
+              filetype = filetype,
+              overwrite = TRUE,
+              options = gdal
+            ),
+            args
+          )
         )
         if (filetype == "ESRI Shapefile") {
           file.rename(paste0(path, ".shz"), path)
@@ -133,7 +141,7 @@ tar_terra_vect <- function(
       },
       marshal = function(object) terra::wrap(object),
       unmarshal = function(object) terra::unwrap(object),
-      substitute = list(filetype = filetype, gdal = gdal)
+      substitute = list(filetype = filetype, gdal = gdal, args = list(...))
     ),
     repository = repository,
     iteration = "list", # only "list" works for now

@@ -10,6 +10,7 @@ tar_terra_rast(
   pattern = NULL,
   filetype = geotargets_option_get("gdal.raster.driver"),
   gdal = geotargets_option_get("gdal.raster.creation.options"),
+  datatype = geotargets_option_get("gdal.raster.data.type"),
   preserve_metadata = geotargets_option_get("terra.preserve.metadata"),
   ...,
   tidy_eval = targets::tar_option_get("tidy_eval"),
@@ -44,6 +45,10 @@ to \code{\link[terra:writeRaster]{terra::writeRaster()}}}
 \item{gdal}{character. GDAL driver specific datasource creation options
 passed to \code{\link[terra:writeRaster]{terra::writeRaster()}}}
 
+\item{datatype}{character. Data type passed to \code{\link[terra:writeRaster]{terra::writeRaster()}}. One
+of: \code{"INT1U"}, \code{"INT2U"}, \code{"INT4U"}, \code{"INT8U"}, \code{"INT2S"}, \code{"INT4S"},
+\code{"INT8S"}, \code{"FLT4S"}, \code{"FLT8S"}}
+
 \item{preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
 raster metadata such as units and datetimes are lost (note that this does
@@ -58,7 +63,7 @@ get this working for you. Also note that you can specify this option
 inside \code{\link[=geotargets_option_set]{geotargets_option_set()}} if you want to set this for the entire
 pipeline.}
 
-\item{...}{Additional arguments not yet used}
+\item{...}{Additional arguments passed to \code{\link[terra:writeRaster]{terra::writeRaster()}}}
 
 \item{tidy_eval}{Logical, whether to enable tidy evaluation
 when interpreting \code{command} and \code{pattern}. If \code{TRUE}, you can use the
