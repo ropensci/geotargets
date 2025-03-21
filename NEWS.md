@@ -4,6 +4,7 @@
 * Fixed examples for `tar_terra_tiles()`, `tile_grid()`, `tar_terra_sds()`, and `tar_terra_sprc()` as reported by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675)
 * Added details to the documentation for `tar_terra_tiles()` (suggested by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675))
 * completed ropensci review and transferred ownership to ropensci
+* Added `preserve_metadata = "gdalraster_sozip"` option to use `gdalraster::addFilesInZip()` to write multi-file Seek-Optimized ZIP (SOZip) file targets, and `/vsizip/` GDAL Virtual File System paths for reading without extraction
 
 # geotargets 0.2.0 (29 November 2024)
 
