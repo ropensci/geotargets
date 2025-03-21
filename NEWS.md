@@ -8,7 +8,6 @@
 * Added `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file (Thanks to @brownag in #138)
 * Added `preserve_metadata = "gdalraster_sozip"` option to use `gdalraster::addFilesInZip()` to write multi-file Seek-Optimized ZIP (SOZip) file targets, and `/vsizip/` GDAL Virtual File System paths for reading without extraction
 
-
 # geotargets 0.2.0 (29 November 2024)
 
 * Created `tar_stars()` and `tar_stars_proxy()` that create `stars` and `stars_proxy` objects, respectively.
