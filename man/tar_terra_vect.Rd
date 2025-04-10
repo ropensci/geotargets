@@ -235,8 +235,8 @@ The \code{iteration} argument is unavailable because it is hard-coded to
 
 Although you may pass any supported GDAL vector driver to the
 \code{filetype} argument, not all formats are guaranteed to work with
-\code{geotargets}.  At the moment, we have tested \code{GeoJSON} and \verb{ESRI Shapefile}
-which both appear to work generally.
+\code{geotargets}.  At the moment, we have tested \code{GPKG}, \code{GeoJSON} and
+\verb{ESRI Shapefile} which all appear to work generally.
 }
 \examples{
 # For CRAN. Ensures these examples run under certain conditions.
