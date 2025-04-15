@@ -18,14 +18,14 @@
 #'   `"UInt32"`, `"UInt64"`, `"Int16"`, `"Int32"`, `"Int64"`, `"Float32"`,
 #'   `"Float64"` (for stars).
 #' @param gdal_vector_driver character, length 1; set the file type used for
-#' vector data in target store (default: `"GeoJSON"`).
+#' vector data in target store (default: `"GPKG"`).
 #' @param gdal_vector_creation_options character; set the GDAL layer creation
 #'   options used when writing vector files to target store (default:
 #'   `"ENCODING=UTF-8"`). You may specify multiple values e.g.
 #'   `c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")`. Each GDAL driver supports
-#'   a unique set of creation options. For example, with the default `"GeoJSON"`
+#'   a unique set of creation options. For example, with the default `"GPKG"`
 #'   driver:
-#'   <https://gdal.org/drivers/vector/geojson.html#layer-creation-options>
+#'   <https://gdal.org/drivers/vector/gpkg.html#layer-creation-options>
 #' @param terra_preserve_metadata character. When `"drop"` (default), any
 #'   auxiliary files that would be written by [terra::writeRaster()] containing
 #'   raster metadata such as units and datetimes are lost (note that this does

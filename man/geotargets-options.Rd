@@ -35,15 +35,15 @@ One of: \code{"INT1U"}, \code{"INT2U"}, \code{"INT4U"}, \code{"INT8U"}, \code{"I
 \code{"Float64"} (for stars).}
 
 \item{gdal_vector_driver}{character, length 1; set the file type used for
-vector data in target store (default: \code{"GeoJSON"}).}
+vector data in target store (default: \code{"GPKG"}).}
 
 \item{gdal_vector_creation_options}{character; set the GDAL layer creation
 options used when writing vector files to target store (default:
 \code{"ENCODING=UTF-8"}). You may specify multiple values e.g.
 \code{c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")}. Each GDAL driver supports
-a unique set of creation options. For example, with the default \code{"GeoJSON"}
+a unique set of creation options. For example, with the default \code{"GPKG"}
 driver:
-\url{https://gdal.org/drivers/vector/geojson.html#layer-creation-options}}
+\url{https://gdal.org/drivers/vector/gpkg.html#layer-creation-options}}
 
 \item{terra_preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
