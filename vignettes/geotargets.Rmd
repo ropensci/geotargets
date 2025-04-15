@@ -207,7 +207,7 @@ targets::tar_script({
       system.file("ex", "elev.tif", package = "terra"),
       format = "file"
     ),
-    tar_target(
+    tar_terra_rast(
       r,
       rast(elev_file)
     ),

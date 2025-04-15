@@ -198,3 +198,42 @@ tar_test("metadata is maintained for COG", {
   expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
   expect_identical(head(terra::values(x)), head(terra::values(tar_read(r2))))
 })
+
+tar_test("metadata is maintained (gdalraster SOZip)", {
+  skip_if_not_installed("gdalraster")
+  tar_script({
+    library(targets)
+    library(geotargets)
+    library(terra)
+    geotargets_option_set(terra_preserve_metadata = "gdalraster_sozip")
+    make_rast <- function() {
+      f <- system.file("ex/elev.tif", package = "terra")
+      r <- terra::rast(f)
+      r <- c(r, r + 10, r / 2)
+      terra::units(r) <- rep("m", 3)
+      terra::time(r) <- as.Date("2024-10-01") + c(0, 1, 2)
+      terra::metags(r) <- "FOO=BAR"
+      terra::metags(r, layer = 1) <- "asdf=hjkl"
+      r
+    }
+    list(
+      tar_terra_rast(r, make_rast(), filetype = "HFA")
+    )
+  })
+  tar_make()
+  x <- tar_read(r)
+  expect_identical(terra::units(x), rep("m", 3))
+  expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
+  expect_identical(terra::metags(x), data.frame(
+      name = c("AREA_OR_POINT", "FOO"),
+      value = c("Area", "BAR"),
+      domain = c("", "")
+  ))
+  expect_identical(terra::metags(x, 1),
+                 data.frame(
+                     layer = 1,
+                     name = "asdf",
+                     value = "hjkl"
+                 )
+)
+})
