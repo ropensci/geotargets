@@ -24,8 +24,8 @@
 #'
 #' @note Although you may pass any supported GDAL vector driver to the
 #'   `filetype` argument, not all formats are guaranteed to work with
-#'   `geotargets`.  At the moment, we have tested `GeoJSON` and `ESRI Shapefile`
-#'   which both appear to work generally.
+#'   `geotargets`.  At the moment, we have tested `GPKG`, `GeoJSON` and
+#'   `ESRI Shapefile` which all appear to work generally.
 #' @export
 #' @examples
 #' # For CRAN. Ensures these examples run under certain conditions.
@@ -74,7 +74,7 @@ tar_terra_vect <- function(
   cue = targets::tar_option_get("cue"),
   description = targets::tar_option_get("description")
 ) {
-  filetype <- filetype %||% "GeoJSON"
+  filetype <- filetype %||% "GPKG"
   gdal <- gdal %||% "ENCODING=UTF-8"
 
   # Check that filetype is available
