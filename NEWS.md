@@ -1,4 +1,5 @@
-# geotargets 0.3.0 (21 March 2025)
+# geotargets 0.3.0 (16 April 2025)
+
 * Bugfix by @brownag that fixes use of `file.rename()` in `tar_terra_rast(..., preserve_metadata = "zip")`, which does not work when the temporary directory is on a different partition. (#121, PR #122).
 * Fixed examples for `tar_terra_tiles()`, `tile_grid()`, `tar_terra_sds()`, and `tar_terra_sprc()` as reported by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675)
 * Added details to the documentation for `tar_terra_tiles()` (suggested by @amart90 as part of [rOpenSci review](https://github.com/ropensci/software-review/issues/675))
@@ -7,7 +8,7 @@
 * Additional arguments `...` are now passed to the target "write" method: `terra::writeRaster()` for `tar_terra_rast()`, `terra::writeVector()` for `tar_terra_vect()` and `stars::write_stars()` for `tar_stars()` (Thanks to @brownag in #137, resolves #132 and #127)
 * Added `tar_terra_vrt()` for `SpatRaster` object targets that reference multiple data sources (e.g. tiles created with `tar_terra_tiles()`) using a GDAL Virtual Dataset (VRT) XML file (Thanks to @brownag in #138)
 * The default driver for `tar_terra_vect()` has been changed to `"GPKG"` in order to preserve CRS information (#166).
-* Added `preserve_metadata = "gdalraster_sozip"` option to use `gdalraster::addFilesInZip()` to write multi-file Seek-Optimized ZIP (SOZip) file targets, and `/vsizip/` GDAL Virtual File System paths for reading without extraction
+* Added `preserve_metadata = "gdalraster_sozip"` option to use `gdalraster::addFilesInZip()` to write multi-file Seek-Optimized ZIP (SOZip) file targets, and `/vsizip/` GDAL Virtual File System paths for reading without extraction (#167)
 
 # geotargets 0.2.0 (29 November 2024)
 
