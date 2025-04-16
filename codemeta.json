@@ -2,9 +2,9 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "geotargets",
-  "description": "Provides extensions for various geospatial file formats, such as shapefiles and rasters. Currently provides support for the 'terra' geospatial formats. See the vignettes for worked examples, demonstrations, and explanations of how to use the various package extensions.",
-  "name": "geotargets: 'Targets' Extensions for Geospatial Formats",
-  "relatedLink": "https://docs.ropensci.org/geotargets",
+  "description": "Provides extensions for various geographic spatial file formats, such as shape files and rasters. Currently provides support for the 'terra' geographic spatial formats. See the vignettes for worked examples, demonstrations, and explanations of how to use the various package extensions.",
+  "name": "geotargets: 'Targets' Extensions for Geographic Spatial Formats",
+  "relatedLink": "https://docs.ropensci.org/geotargets/",
   "codeRepository": "https://github.com/ropensci/geotargets",
   "issueTracker": "https://github.com/ropensci/geotargets/issues",
   "license": "https://spdx.org/licenses/MIT",
@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "runtimePlatform": "R version 4.5.0 (2025-04-11)",
   "author": [
     {
       "@type": "Person",
@@ -146,6 +146,18 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "gdalraster",
+      "name": "gdalraster",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gdalraster"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
       "provider": {
@@ -160,6 +172,12 @@
   "softwareRequirements": {
     "1": {
       "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 4.1.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
       "identifier": "targets",
       "name": "targets",
       "version": ">= 1.8.0",
@@ -171,7 +189,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=targets"
     },
-    "2": {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "rlang",
       "name": "rlang",
@@ -184,7 +202,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rlang"
     },
-    "3": {
+    "4": {
       "@type": "SoftwareApplication",
       "identifier": "cli",
       "name": "cli",
@@ -197,7 +215,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=cli"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "terra",
       "name": "terra",
@@ -210,7 +228,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=terra"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "withr",
       "name": "withr",
@@ -223,7 +241,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "zip",
       "name": "zip",
@@ -235,7 +253,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=zip"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
@@ -249,7 +267,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "296.887KB",
+  "fileSize": "325.496KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -276,7 +294,7 @@
         }
       ],
       "name": "geotargets: 'Targets' Extensions for Geospatial Formats",
-      "url": "http://geotargets.njtierney.com"
+      "url": "https://docs.ropensci.org/geotargets/"
     }
   ],
   "releaseNotes": "https://github.com/ropensci/geotargets/blob/master/NEWS.md",
