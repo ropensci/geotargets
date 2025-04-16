@@ -19,14 +19,14 @@ geotargets_option_get(name)
 \arguments{
 \item{gdal_raster_driver}{character, length 1; set the driver used for raster
 data in target store (default: \code{"GTiff"}). Options for driver names can be
-found here: \url{https://gdal.org/drivers/raster/index.html}.}
+found here: \url{https://gdal.org/en/stable/drivers/raster/index.html}.}
 
 \item{gdal_raster_creation_options}{character; set the GDAL creation options
 used when writing raster files to target store (default: \code{""}). You may
 specify multiple values e.g. \code{c("COMPRESS=DEFLATE", "TFW=YES")}. Each GDAL
 driver supports a unique set of creation options. For example, with the
 default \code{"GTiff"} driver:
-\url{https://gdal.org/drivers/raster/gtiff.html#creation-options}.}
+\url{https://gdal.org/en/stable/drivers/raster/gtiff.html}.}
 
 \item{gdal_raster_data_type}{character; Data type for writing raster file.
 One of: \code{"INT1U"}, \code{"INT2U"}, \code{"INT4U"}, \code{"INT8U"}, \code{"INT2S"}, \code{"INT4S"},
@@ -43,7 +43,7 @@ options used when writing vector files to target store (default:
 \code{c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")}. Each GDAL driver supports
 a unique set of creation options. For example, with the default \code{"GPKG"}
 driver:
-\url{https://gdal.org/drivers/vector/gpkg.html#layer-creation-options}}
+\url{https://gdal.org/en/stable/drivers/vector/gpkg.html}}
 
 \item{terra_preserve_metadata}{character. When \code{"drop"} (default), any
 auxiliary files that would be written by \code{\link[terra:writeRaster]{terra::writeRaster()}} containing
