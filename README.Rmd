@@ -75,7 +75,7 @@ We currently provide support for the `terra` package with `targets`. Below we sh
 - `tar_terra_vect()`
 - `tar_terra_sprc()`
 - `tar_terra_sds()`
-- `tar_tera_tiles()`
+- `tar_terra_tiles()`
 - `tar_stars()`
 
 You would use these in place of `tar_target()` in your targets pipeline, e.g., when you are doing work with `terra` raster, vector, or raster collection data.

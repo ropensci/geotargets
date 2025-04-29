@@ -81,7 +81,7 @@ Below we show three examples of target factories:
 - `tar_terra_vect()`
 - `tar_terra_sprc()`
 - `tar_terra_sds()`
-- `tar_tera_tiles()`
+- `tar_terra_tiles()`
 - `tar_stars()`
 
 You would use these in place of `tar_target()` in your targets pipeline,
