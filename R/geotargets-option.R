@@ -5,13 +5,13 @@
 #'
 #' @param gdal_raster_driver character, length 1; set the driver used for raster
 #'   data in target store (default: `"GTiff"`). Options for driver names can be
-#'   found here: <https://gdal.org/drivers/raster/index.html>.
+#'   found here: <https://gdal.org/en/stable/drivers/raster/index.html>.
 #' @param gdal_raster_creation_options character; set the GDAL creation options
 #'   used when writing raster files to target store (default: `""`). You may
 #'   specify multiple values e.g. `c("COMPRESS=DEFLATE", "TFW=YES")`. Each GDAL
 #'   driver supports a unique set of creation options. For example, with the
 #'   default `"GTiff"` driver:
-#'   <https://gdal.org/drivers/raster/gtiff.html#creation-options>.
+#'   <https://gdal.org/en/stable/drivers/raster/gtiff.html#creation-options>.
 #' @param gdal_raster_data_type character; Data type for writing raster file.
 #'   One of: `"INT1U"`, `"INT2U"`, `"INT4U"`, `"INT8U"`, `"INT2S"`, `"INT4S"`,
 #'   `"INT8S"`, `"FLT4S"`, `"FLT8S"` (for terra), or `"Byte"`, `"UInt16"`,
@@ -25,7 +25,7 @@
 #'   `c("WRITE_BBOX=YES", "COORDINATE_PRECISION=10")`. Each GDAL driver supports
 #'   a unique set of creation options. For example, with the default `"GPKG"`
 #'   driver:
-#'   <https://gdal.org/drivers/vector/gpkg.html#layer-creation-options>
+#'   <https://gdal.org/en/stable/drivers/vector/gpkg.html#layer-creation-options>
 #' @param terra_preserve_metadata character. When `"drop"` (default), any
 #'   auxiliary files that would be written by [terra::writeRaster()] containing
 #'   raster metadata such as units and datetimes are lost (note that this does

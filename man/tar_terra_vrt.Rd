@@ -252,6 +252,9 @@ functions like \code{\link[targets:tar_make]{tar_make()}}. For example,
 lists all the targets whose descriptions start with the character
 string \code{"survival model"}.}
 }
+\value{
+target class "tar_stem" for use in a target pipeline
+}
 \description{
 Provides a target format for \link[terra:SpatRaster-class]{terra::SpatRaster},
 \link[terra:SpatRaster-class]{terra::SpatRasterDataset}, and \link[terra:SpatRaster-class]{terra::SpatRasterCollection}

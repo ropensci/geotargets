@@ -19,6 +19,7 @@
 #' @importFrom rlang %||% arg_match0
 #' @seealso [tar_terra_tiles()]
 #' @export
+#' @return target class "tar_stem" for use in a target pipeline
 #' @examples
 #' if (Sys.getenv("TAR_LONG_EXAMPLES") == "true") {
 #'  targets::tar_dir({ # tar_dir() runs code from a temporary directory.

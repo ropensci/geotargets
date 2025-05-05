@@ -25,7 +25,7 @@
 #'  will be read as an object of class `stars_proxy`. Otherwise, the object is
 #'  class `stars`.
 #' @param mdim logical. Use the [Multidimensional Raster Data
-#'  Model](https://gdal.org/user/multidim_raster_data_model.html) via
+#'  Model](https://gdal.org/en/stable/user/multidim_raster_data_model.html) via
 #'  [stars::write_mdim()]? Default: `FALSE`. Only supported for some drivers,
 #'  e.g. `"netCDF"` or `"Zarr"`.
 #' @param ncdf logical. Use the NetCDF library directly to read data via
