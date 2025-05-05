@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "geotargets",
   "description": "Provides extensions for various geographic spatial file formats, such as shape files and rasters. Currently provides support for the 'terra' geographic spatial formats. See the vignettes for worked examples, demonstrations, and explanations of how to use the various package extensions.",
-  "name": "geotargets: 'Targets' Extensions for Geographic Spatial Formats",
+  "name": "geotargets: 'targets' Extensions for Geographic Spatial Formats",
   "relatedLink": "https://docs.ropensci.org/geotargets/",
   "codeRepository": "https://github.com/ropensci/geotargets",
   "issueTracker": "https://github.com/ropensci/geotargets/issues",
@@ -267,7 +267,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "325.496KB",
+  "fileSize": "325.704KB",
   "citation": [
     {
       "@type": "CreativeWork",
@@ -298,7 +298,7 @@
     }
   ],
   "releaseNotes": "https://github.com/ropensci/geotargets/blob/master/NEWS.md",
-  "readme": "https://github.com/ropensci/geotargets/blob/master/README.md",
+  "readme": "https://github.com/ropensci/geotargets/blob/main/README.md",
   "contIntegration": ["https://github.com/ropensci/geotargets/actions/workflows/R-CMD-check.yaml", "https://app.codecov.io/gh/ropensci/geotargets?branch=master", "https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck"],
   "developmentStatus": "https://www.repostatus.org/#active",
   "review": {
