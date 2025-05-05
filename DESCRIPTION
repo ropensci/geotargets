@@ -1,5 +1,5 @@
 Package: geotargets
-Title: 'Targets' Extensions for Geographic Spatial Formats
+Title: 'targets' Extensions for Geographic Spatial Formats
 Version: 0.3.0
 Authors@R: c(
     person(
