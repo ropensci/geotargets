@@ -4,7 +4,7 @@
 \name{geotargets-package}
 \alias{geotargets}
 \alias{geotargets-package}
-\title{geotargets: 'Targets' Extensions for Geographic Spatial Formats}
+\title{geotargets: 'targets' Extensions for Geographic Spatial Formats}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
