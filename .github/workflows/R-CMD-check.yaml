@@ -23,6 +23,7 @@ jobs:
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
           - {os: ubuntu-latest,   r: 'release'}
           - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - {os: ubuntu-22.04,    r: 'release'} #test with older version of GDAL
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
