@@ -114,7 +114,7 @@ tar_terra_rast <- function(
   if (preserve_metadata == "gdalraster_sozip") {
     check_pkg_installed("gdalraster")
     if (terra::gdal() < "3.7") {
-      cli::cli_abort('GDAL ≥ 3.7 is needed to use `preserve_metadata = "gdalraster_sozip"')
+      cli::cli_abort('GDAL >= 3.7 is needed to use {.arg preserve_metadata = "gdalraster_sozip"}')
     }
   }
 
