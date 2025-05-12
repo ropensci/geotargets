@@ -201,6 +201,7 @@ tar_test("metadata is maintained for COG", {
 
 tar_test("metadata is maintained (gdalraster SOZip)", {
   skip_if_not_installed("gdalraster")
+  skip_if_not(terra::gdal() >= "3.7")
   tar_script({
     library(targets)
     library(geotargets)
