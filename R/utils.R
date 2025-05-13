@@ -19,6 +19,21 @@ gdal_version <- function() {
   numeric_version(terra::gdal(lib = "gdal"))
 }
 
+check_gdal_sozip <- function(call = rlang::caller_env()) {
+  gdal_cannot_sozip <- gdal_version() < numeric_version("3.7")
+  if (gdal_cannot_sozip) {
+    cli::cli_abort(
+      message = c(
+        "Must have {.pkg GDAL} version {.val 3.7} or greater",
+        "i" = "To use {.arg preserve_metadata = 'gdalraster_sozip'}",
+        "x" = "We see {.pkg GDAL} version: {.val {gdal_version()}}"
+      ),
+      call = call
+    )
+  }
+}
+
+
 check_gdal_shz <- function(min_version = "3.1", call = rlang::caller_env()) {
   if (gdal_version() < numeric_version(min_version)) {
     cli::cli_abort(

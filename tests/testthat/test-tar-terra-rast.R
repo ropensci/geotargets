@@ -201,7 +201,7 @@ tar_test("metadata is maintained for COG", {
 
 tar_test("metadata is maintained (gdalraster SOZip)", {
   skip_if_not_installed("gdalraster")
-  skip_if_not(terra::gdal() >= "3.7")
+  skip_if_not(gdal_version() >= numeric_version("3.7"))
   tar_script({
     library(targets)
     library(geotargets)
@@ -225,16 +225,20 @@ tar_test("metadata is maintained (gdalraster SOZip)", {
   x <- tar_read(r)
   expect_identical(terra::units(x), rep("m", 3))
   expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
-  expect_identical(terra::metags(x), data.frame(
+  expect_identical(
+    terra::metags(x),
+    data.frame(
       name = c("AREA_OR_POINT", "FOO"),
       value = c("Area", "BAR"),
       domain = c("", "")
-  ))
-  expect_identical(terra::metags(x, 1),
-                 data.frame(
-                     layer = 1,
-                     name = "asdf",
-                     value = "hjkl"
-                 )
-)
+    )
+  )
+  expect_identical(
+    terra::metags(x, 1),
+    data.frame(
+      layer = 1,
+      name = "asdf",
+      value = "hjkl"
+    )
+  )
 })
