@@ -17,7 +17,7 @@ targets::tar_test("tar_terra_vrt() works", {
     )
   })
 
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
 
   expect_true(all(is.na(targets::tar_meta()$error)))
 

@@ -44,7 +44,7 @@ targets::tar_test("tar_terra_tiles() works", {
     manifest[manifest$name == "rast_split", ][["command"]],
     "set_window(my_map, terra::ext(rast_split_exts))"
   )
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   expect_true(all(is.na(targets::tar_meta()$error)))
 })
 
@@ -83,7 +83,7 @@ targets::tar_test("recombined tiles are equal to original", {
       )
     )
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   targets::tar_load(
     c(
       my_map,
