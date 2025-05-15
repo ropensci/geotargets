@@ -1,3 +1,5 @@
+# geotargets (development version)
+
 # geotargets 0.3.0 (16 April 2025)
 
 * Bugfix by @brownag that fixes use of `file.rename()` in `tar_terra_rast(..., preserve_metadata = "zip")`, which does not work when the temporary directory is on a different partition. (#121, PR #122).
