@@ -14,7 +14,7 @@ targets::tar_test("tar_stars() works", {
       )
     ))
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   x <- targets::tar_read(test_stars)
   expect_s3_class(x, "stars")
   expect_snapshot(
@@ -34,7 +34,7 @@ targets::tar_test("tar_stars_proxy() works", {
       )
     ))
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   x <- targets::tar_read(test_stars_proxy)
   expect_s3_class(x, "stars_proxy")
   expect_snapshot(
@@ -62,7 +62,7 @@ targets::tar_test("tar_stars(mdim=TRUE) works", {
     ))
   })
 
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   x <- targets::tar_read(test_stars_mdim)
   expect_s3_class(x, "stars")
   expect_snapshot(x)
@@ -91,7 +91,7 @@ targets::tar_test("tar_stars(mdim=TRUE, ncdf=TRUE) works", {
     ))
   })
 
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   # warnings related to no CRS
   suppressWarnings({
     x <- targets::tar_read(test_stars_mdim_ncdf)
@@ -120,6 +120,6 @@ targets::tar_test("tar_stars() works with dynamic branching", {
       )
     )
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   expect_length(targets::tar_read(test_stars_plus), 2)
 })

@@ -11,7 +11,7 @@ targets::tar_test("geotargets_options_get() retrieves options in correct priorit
           )
         )
       })
-      targets::tar_make()
+      targets::tar_make(reporter = "silent")
       expect_identical(
         geotargets::geotargets_option_get("gdal.raster.driver"),
         "GIF"

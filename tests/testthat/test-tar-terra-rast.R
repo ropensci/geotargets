@@ -10,7 +10,7 @@ targets::tar_test("tar_terra_rast() works", {
       )
     )
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   x <- targets::tar_read(test_terra_rast)
   expect_s4_class(x, "SpatRaster")
   expect_identical(terra::datatype(x), "INT4S")
@@ -35,7 +35,7 @@ targets::tar_test("tar_terra_rast() works with multiple workers (tests un/marsha
       )
     )
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   expect_true(all(is.na(targets::tar_meta()$error)))
   expect_s4_class(targets::tar_read(rast1), "SpatRaster")
 })
@@ -58,7 +58,7 @@ targets::tar_test("tar_terra_rast() works with dynamic branching", {
       )
     )
   })
-  targets::tar_make()
+  targets::tar_make(reporter = "silent")
   expect_length(targets::tar_read(my_map_plus), 2)
 })
 
@@ -123,7 +123,7 @@ tar_test("That changing filetype invalidates a target", {
       )
     )
   })
-  tar_make()
+  tar_make(reporter = "silent")
 
   targets::tar_script({
     library(targets)
@@ -163,7 +163,7 @@ tar_test("metadata is maintained for GTiff", {
       tar_terra_rast(r2, make_rast(), preserve_metadata = "drop")
     )
   })
-  tar_make()
+  tar_make(reporter = "silent")
   x <- tar_read(r)
   expect_identical(terra::units(x), rep("m", 3))
   expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
@@ -192,7 +192,7 @@ tar_test("metadata is maintained for COG", {
       tar_terra_rast(r2, make_rast(), preserve_metadata = "drop")
     )
   })
-  tar_make()
+  tar_make(reporter = "silent")
   x <- tar_read(r)
   expect_identical(terra::units(x), rep("m", 3))
   expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
@@ -201,6 +201,7 @@ tar_test("metadata is maintained for COG", {
 
 tar_test("metadata is maintained (gdalraster SOZip)", {
   skip_if_not_installed("gdalraster")
+  skip_if_not(gdal_version() >= numeric_version("3.7"))
   tar_script({
     library(targets)
     library(geotargets)
@@ -220,20 +221,24 @@ tar_test("metadata is maintained (gdalraster SOZip)", {
       tar_terra_rast(r, make_rast(), filetype = "HFA")
     )
   })
-  tar_make()
+  tar_make(reporter = "silent")
   x <- tar_read(r)
   expect_identical(terra::units(x), rep("m", 3))
   expect_identical(terra::time(x), as.Date("2024-10-01") + c(0, 1, 2))
-  expect_identical(terra::metags(x), data.frame(
+  expect_identical(
+    terra::metags(x),
+    data.frame(
       name = c("AREA_OR_POINT", "FOO"),
       value = c("Area", "BAR"),
       domain = c("", "")
-  ))
-  expect_identical(terra::metags(x, 1),
-                 data.frame(
-                     layer = 1,
-                     name = "asdf",
-                     value = "hjkl"
-                 )
-)
+    )
+  )
+  expect_identical(
+    terra::metags(x, 1),
+    data.frame(
+      layer = 1,
+      name = "asdf",
+      value = "hjkl"
+    )
+  )
 })

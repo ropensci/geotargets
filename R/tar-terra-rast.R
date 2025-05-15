@@ -113,6 +113,7 @@ tar_terra_rast <- function(
 
   if (preserve_metadata == "gdalraster_sozip") {
     check_pkg_installed("gdalraster")
+    check_gdal_sozip()
   }
 
   # ensure that user-passed `resources` doesn't include `custom_format`

@@ -16,3 +16,4 @@ docs
 inst/doc
 /doc/
 /Meta/
+.Renviron
