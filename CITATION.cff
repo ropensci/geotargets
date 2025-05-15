@@ -7,8 +7,11 @@ cff-version: 1.2.0
 message: 'To cite package "geotargets" in publications use:'
 type: software
 license: MIT
-title: 'geotargets: ''Targets'' Extensions for Geographic Spatial Formats'
-version: 0.3.0
+title: 'geotargets: ''targets'' Extensions for Geographic Spatial Formats'
+version: 0.3.1
+identifiers:
+- type: doi
+  value: 10.32614/CRAN.package.geotargets
 abstract: Provides extensions for various geographic spatial file formats, such as
   shape files and rasters. Currently provides support for the 'terra' geographic spatial
   formats. See the vignettes for worked examples, demonstrations, and explanations
@@ -58,6 +61,7 @@ preferred-citation:
   - vector
   - workflow
   version: 0.3.0
+repository: https://CRAN.R-project.org/package=geotargets
 repository-code: https://github.com/ropensci/geotargets
 url: https://docs.ropensci.org/geotargets/
 contact:
