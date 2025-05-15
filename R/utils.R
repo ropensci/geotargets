@@ -16,11 +16,16 @@ check_pkg_installed <- function(pkg, call = rlang::caller_env()) {
 }
 
 gdal_version <- function() {
-  numeric_version(terra::gdal(lib = "gdal"))
+  numeric_version(gdalraster::gdal_version()[4])
 }
 
+gdal_version_lt <- function(version) {
+  gdal_version() < numeric_version(version)
+}
+
+
 check_gdal_sozip <- function(call = rlang::caller_env()) {
-  gdal_cannot_sozip <- gdal_version() < numeric_version("3.7")
+  gdal_cannot_sozip <- gdal_version_lt("3.7.0")
   if (gdal_cannot_sozip) {
     cli::cli_abort(
       message = c(
