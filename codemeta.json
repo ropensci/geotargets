@@ -8,13 +8,19 @@
   "codeRepository": "https://github.com/ropensci/geotargets",
   "issueTracker": "https://github.com/ropensci/geotargets/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
   "runtimePlatform": "R version 4.5.0 (2025-04-11)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -146,18 +152,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "gdalraster",
-      "name": "gdalraster",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=gdalraster"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
       "provider": {
@@ -265,9 +259,22 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "gdalraster",
+      "name": "gdalraster",
+      "version": ">= 2.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gdalraster"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "325.704KB",
+  "fileSize": "327.4KB",
   "citation": [
     {
       "@type": "CreativeWork",
