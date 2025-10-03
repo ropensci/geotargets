@@ -18,7 +18,7 @@
       x[1]
     Output
       class       : SpatRaster 
-      dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
+      size        : 90, 95, 1  (nrow, ncol, nlyr)
       resolution  : 0.008333333, 0.008333333  (x, y)
       extent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)
       coord. ref. : lon/lat WGS 84 (EPSG:4326) 
@@ -35,7 +35,7 @@
       x[2]
     Output
       class       : SpatRaster 
-      dimensions  : 115, 114, 1  (nrow, ncol, nlyr)
+      size        : 115, 114, 1  (nrow, ncol, nlyr)
       resolution  : 683.4048, 683.4048  (x, y)
       extent      : 1480982, 1558890, 5478149, 5556741  (xmin, xmax, ymin, ymax)
       coord. ref. : +proj=igh +lon_0=0 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs 
@@ -67,7 +67,7 @@
       x[1]
     Output
       class       : SpatRaster 
-      dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
+      size        : 90, 95, 1  (nrow, ncol, nlyr)
       resolution  : 0.008333333, 0.008333333  (x, y)
       extent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)
       coord. ref. : lon/lat WGS 84 (EPSG:4326) 
@@ -84,7 +84,7 @@
       x[2]
     Output
       class       : SpatRaster 
-      dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
+      size        : 90, 95, 1  (nrow, ncol, nlyr)
       resolution  : 0.008333333, 0.008333333  (x, y)
       extent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)
       coord. ref. : lon/lat WGS 84 (EPSG:4326) 
