@@ -80,8 +80,8 @@ storage.
 Note: if \code{repository} is not \code{"local"} and \code{format} is \code{"file"}
 then the target should create a single output file.
 That output file is uploaded to the cloud and tracked for changes
-where it exists in the cloud. The local file is deleted after
-the target runs.}
+where it exists in the cloud. As of \code{targets} version 1.11.0 and higher,
+the local file is no longer deleted after the target runs.}
 
 \item{error}{Character of length 1, what to do if the target
 stops and throws an error. Options:
@@ -120,7 +120,8 @@ for non-dynamically-branched targets that other targets
 dynamically branch over. For example: if your pipeline has
 \code{tar_target(name = y, command = x, pattern = map(x))},
 then \code{tar_target(name = x, command = f(), memory = "auto")}
-will use persistent memory in order to avoid rereading all of \code{x}
+will use persistent memory for \code{x}
+in order to avoid rereading all of \code{x}
 for every branch of \code{y}.
 \item \code{"transient"}: the target gets unloaded
 after every new target completes.
