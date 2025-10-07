@@ -16,6 +16,10 @@ coverage](https://codecov.io/gh/ropensci/geotargets/branch/master/graph/badge.sv
 [![pkgcheck](https://github.com/ropensci/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck)
 [![Status at rOpenSci Software Peer
 Review](https://badges.ropensci.org/675_status.svg)](https://github.com/ropensci/software-review/issues/675)
+[![R-multiverse
+status](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcommunity.r-multiverse.org%2Fapi%2Fpackages%2Fgeotargets&query=%24.Version&label=r-multiverse)](https://community.r-multiverse.org/geotargets)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/geotargets)](https://CRAN.R-project.org/package=geotargets)
 <!-- badges: end -->
 
 `geotargets` extends [`targets`](https://github.com/ropensci/targets) to
@@ -99,7 +103,8 @@ the repos:
 ``` r
 library(targets)
 
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
@@ -120,10 +125,10 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> + terra_rast_example dispatched
-#> ✔ terra_rast_example completed [2ms, 8.52 kB]
-#> ✔ ended pipeline [185ms, 1 completed, 0 skipped]
+#> ✔ terra_rast_example completed [65ms, 8.52 kB]
+#> ✔ ended pipeline [383ms, 1 completed, 0 skipped]
 #> class       : SpatRaster 
-#> dimensions  : 90, 95, 1  (nrow, ncol, nlyr)
+#> size        : 90, 95, 1  (nrow, ncol, nlyr)
 #> resolution  : 0.008333333, 0.008333333  (x, y)
 #> extent      : 5.741667, 6.533333, 49.44167, 50.19167  (xmin, xmax, ymin, ymax)
 #> coord. ref. : lon/lat WGS 84 (EPSG:4326) 
@@ -136,15 +141,14 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 ## `tar_terra_vect()`: targets with terra vectors
 
 ``` r
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
     lux_area <- function(projection = "EPSG:4326") {
       terra::project(
-        terra::vect(system.file("ex", "lux.shp",
-          package = "terra"
-        )),
+        terra::vect(system.file("ex", "lux.shp", package = "terra")),
         projection
       )
     }
@@ -162,8 +166,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> + terra_vect_example dispatched
-#> ✔ terra_vect_example completed [24ms, 117.65 kB]
-#> ✔ ended pipeline [185ms, 1 completed, 0 skipped]
+#> ✔ terra_vect_example completed [72ms, 172.03 kB]
+#> ✔ ended pipeline [264ms, 1 completed, 0 skipped]
 #>  class       : SpatVector 
 #>  geometry    : polygons 
 #>  dimensions  : 12, 6  (geometries, attributes)
@@ -180,7 +184,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 ## `tar_terra_sprc()`: targets with terra raster collections
 
 ``` r
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
@@ -209,8 +214,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> + raster_elevs dispatched
-#> ✔ raster_elevs completed [45ms, 37.90 kB]
-#> ✔ ended pipeline [226ms, 1 completed, 0 skipped]
+#> ✔ raster_elevs completed [191ms, 37.90 kB]
+#> ✔ ended pipeline [470ms, 1 completed, 0 skipped]
 #> class       : SpatRasterCollection 
 #> length      : 2 
 #> nrow        : 90, 115 
@@ -224,14 +229,19 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 ## `tar_stars()`: targets with stars objects
 
 ``` r
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
     list(
       tar_stars(
         test_stars,
-        stars::read_stars(system.file("tif", "olinda_dem_utm25s.tif", package = "stars"))
+        stars::read_stars(system.file(
+          "tif",
+          "olinda_dem_utm25s.tif",
+          package = "stars"
+        ))
       )
     )
   })
@@ -241,8 +251,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
   x
 })
 #> + test_stars dispatched
-#> ✔ test_stars completed [16ms, 49.90 kB]
-#> ✔ ended pipeline [185ms, 1 completed, 0 skipped]
+#> ✔ test_stars completed [63ms, 49.90 kB]
+#> ✔ ended pipeline [275ms, 1 completed, 0 skipped]
 #> stars object with 2 dimensions and 1 attribute
 #> attribute(s):
 #>             Min. 1st Qu. Median     Mean 3rd Qu. Max.

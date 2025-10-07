@@ -22,6 +22,8 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/ropensci/geotargets/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ropensci/geotargets?branch=master)
 [![pkgcheck](https://github.com/ropensci/geotargets/workflows/pkgcheck/badge.svg)](https://github.com/ropensci/geotargets/actions?query=workflow%3Apkgcheck)
 [![Status at rOpenSci Software Peer Review](https://badges.ropensci.org/675_status.svg)](https://github.com/ropensci/software-review/issues/675)
+[![R-multiverse status](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcommunity.r-multiverse.org%2Fapi%2Fpackages%2Fgeotargets&query=%24.Version&label=r-multiverse)](https://community.r-multiverse.org/geotargets)
+[![CRAN status](https://www.r-pkg.org/badges/version/geotargets)](https://CRAN.R-project.org/package=geotargets)
 <!-- badges: end -->
 
 `geotargets` extends [`targets`](https://github.com/ropensci/targets) to work with geospatial data formats, such as rasters and vectors (e.g., shapefiles). Currently we support raster and vector formats for the [`terra`](https://github.com/rspatial/terra) package. 
@@ -91,7 +93,8 @@ If you would like to see and download working examples for yourself, see the rep
 #| label: tar-terra-rast
 library(targets)
 
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
@@ -118,15 +121,14 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 
 ```{r}
 #| label: tar-terra-vect
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
     lux_area <- function(projection = "EPSG:4326") {
       terra::project(
-        terra::vect(system.file("ex", "lux.shp",
-          package = "terra"
-        )),
+        terra::vect(system.file("ex", "lux.shp", package = "terra")),
         projection
       )
     }
@@ -150,7 +152,8 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 
 ```{r}
 #| label: tar-terra-sprc
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
@@ -186,14 +189,19 @@ tar_dir({ # tar_dir() runs code from a temporary directory.
 
 ```{r}
 #| label: tar-stars
-tar_dir({ # tar_dir() runs code from a temporary directory.
+tar_dir({
+  # tar_dir() runs code from a temporary directory.
   tar_script({
     library(geotargets)
 
     list(
       tar_stars(
         test_stars,
-        stars::read_stars(system.file("tif", "olinda_dem_utm25s.tif", package = "stars"))
+        stars::read_stars(system.file(
+          "tif",
+          "olinda_dem_utm25s.tif",
+          package = "stars"
+        ))
       )
     )
   })
