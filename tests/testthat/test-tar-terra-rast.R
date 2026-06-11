@@ -1,5 +1,6 @@
 # test_that() #Included to make RStudio recognize this file as a test # nolint
 library(targets)
+
 targets::tar_test("tar_terra_rast() works", {
   targets::tar_script({
     list(
@@ -17,6 +18,7 @@ targets::tar_test("tar_terra_rast() works", {
 })
 
 targets::tar_test("tar_terra_rast() works with multiple workers (tests un/marshaling)", {
+  testthat::skip_if_not_installed("crew")
   targets::tar_script({
     targets::tar_option_set(
       controller = crew::crew_controller_local(workers = 2)
@@ -61,7 +63,7 @@ targets::tar_test("tar_terra_rast() works with dynamic branching", {
 
 
 targets::tar_test("user resources are passed correctly", {
-  library(crew)
+  testthat::skip_if_not_installed("crew")
   persistent <- crew::crew_controller_local(name = "persistent")
   transient <- crew::crew_controller_local(name = "transient", tasks_max = 1L)
   targets::tar_option_set(

@@ -51,6 +51,7 @@ targets::tar_test("tar_terra_vect() works with dynamic branching", {
 })
 
 targets::tar_test("tar_terra_vect() works with multiple workers (tests un/marshaling)", {
+  testthat::skip_if_not_installed("crew")
   targets::tar_script({
     targets::tar_option_set(
       controller = crew::crew_controller_local(workers = 2)
